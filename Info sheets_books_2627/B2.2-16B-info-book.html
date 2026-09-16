@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English B2.2 · B2.2-16B · Information Sheet 2026–2027</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Homemade+Apple&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fell:"IM Fell English","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --fellsc:"IM Fell English SC","IM Fell English","Palatino Linotype",Georgia,serif;
+  --body:"EB Garamond","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --hand:"Homemade Apple","Segoe Script","Bradley Hand",cursive;
+  --gilt:#d9b46a; --gilt-lt:#f3dc9e; --gilt-dk:#8e6a2e;
+  --paper:#ecdfc4; --paper-dk:#d9c7a3; --ink:#2b2118; --ink-soft:#5e4c3a;
+  --red:#9b2b25; --ribbon:#8f1f2b;
+  --bar:64px; --pw:480px; --ph:680px; --fs:17px;
+  --turn:#000;
+}
+.lv21{ --leather:#4b2562; --leather-dk:#220f2e; --leather-lt:#7a4a96; --accent:#5a2a74; --accent-2:#8a5aa6; --m1:#2a1236; --m2:#7b4c94; --m3:#d9b46a; --m4:#e7d6b8; }
+.lv22{ --leather:#1e3c66; --leather-dk:#0b1831; --leather-lt:#3f6aa3; --accent:#1f416f; --accent-2:#4f79ad; --m1:#0e1c36; --m2:#44699c; --m3:#d9b46a; --m4:#e5dcc6; }
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0d0906;color:var(--paper);-webkit-font-smoothing:antialiased;touch-action:manipulation}
+button{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- the room ---------- */
+.room{position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(ellipse 70% 60% at 18% 8%, rgba(255,170,80,.20), transparent 60%),
+    radial-gradient(ellipse 90% 70% at 50% 55%, #2a1c12 0%, #150e09 55%, #070504 100%);
+}
+.room::before{content:"";position:absolute;inset:0;opacity:.35;
+  background:repeating-linear-gradient(92deg, rgba(0,0,0,.0) 0 7px, rgba(0,0,0,.18) 7px 9px, rgba(255,210,160,.03) 9px 16px);
+  mask-image:linear-gradient(to bottom, transparent 45%, #000 80%);-webkit-mask-image:linear-gradient(to bottom, transparent 45%, #000 80%)}
+.candle{position:absolute;left:-12vmax;top:-14vmax;width:60vmax;height:60vmax;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,190,110,.30), rgba(255,150,60,.10) 35%, transparent 65%);
+  animation:flicker 5.3s infinite ease-in-out;pointer-events:none;mix-blend-mode:screen}
+@keyframes flicker{0%,100%{opacity:.85;transform:scale(1)}12%{opacity:.7}20%{opacity:.95;transform:scale(1.02)}34%{opacity:.78}51%{opacity:1;transform:scale(.99)}66%{opacity:.8}80%{opacity:.93;transform:scale(1.015)}}
+#dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 75% at 50% 48%, transparent 55%, rgba(0,0,0,.65) 100%)}
+
+/* ---------- stage & book ---------- */
+.stage{position:fixed;left:0;right:0;top:0;bottom:var(--bar);display:grid;place-items:center}
+#clip{position:relative;width:calc(var(--pw) * 2);height:var(--ph);opacity:0;transform:translateY(24px) scale(.97);transition:opacity 1.1s ease, transform 1.3s cubic-bezier(.25,.46,.45,.94)}
+body.ready #clip{opacity:1;transform:none}
+body.single #clip{width:var(--pw);overflow:hidden;border-radius:2px}
+#book{position:absolute;left:0;top:0;width:calc(var(--pw) * 2);height:var(--ph);perspective:calc(var(--pw) * 4.2);
+  transition:transform .85s cubic-bezier(.45,.05,.25,1)}
+body.noanim #book, body.noanim .block{transition:none}
+.block{position:absolute;top:0;height:var(--ph);transition:left .85s cubic-bezier(.45,.05,.25,1), width .85s cubic-bezier(.45,.05,.25,1);
+  box-shadow:0 calc(var(--pw)*.05) calc(var(--pw)*.12) rgba(0,0,0,.75), 0 4px 10px rgba(0,0,0,.5);border-radius:3px}
+.edges{position:absolute;top:1.2%;bottom:1.2%;background:repeating-linear-gradient(90deg,#e4d4b3 0 1px,#b9a47d 1px 2px);border-radius:0 3px 3px 0}
+.edges.l{border-radius:3px 0 0 3px}
+.leaf{position:absolute;left:var(--pw);top:0;width:var(--pw);height:100%;transform-origin:left center;transform-style:preserve-3d;will-change:transform}
+.leaf.far{visibility:hidden}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.face.back{transform:rotateY(180deg)}
+.shade{position:absolute;inset:0;pointer-events:none;opacity:0}
+.face.front .shade{background:linear-gradient(90deg, rgba(40,25,10,.05), rgba(20,12,4,.55))}
+.face.back .shade{background:linear-gradient(270deg, rgba(40,25,10,.05), rgba(20,12,4,.55))}
+.face.front .shade.gloss{background:linear-gradient(90deg, transparent 20%, rgba(255,245,220,.35) 60%, transparent 90%)}
+.castR,.castL{position:absolute;top:0;height:100%;width:var(--pw);pointer-events:none;opacity:0;z-index:1}
+.castR{left:var(--pw);background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.12) 45%, transparent 80%)}
+.castL{left:0;background:linear-gradient(270deg, rgba(0,0,0,.55), rgba(0,0,0,.12) 45%, transparent 80%)}
+
+/* ---------- leather ---------- */
+.leather{position:absolute;inset:0;color:var(--gilt);
+  background:
+    radial-gradient(ellipse 90% 70% at 60% 35%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(ellipse 120% 90% at 50% 110%, rgba(0,0,0,.45), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"),
+    var(--leather);
+  box-shadow:inset 0 0 calc(var(--pw)*.12) rgba(0,0,0,.6);border-radius:2px 5px 5px 2px}
+.cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7%;
+  background:linear-gradient(90deg, rgba(0,0,0,.55), rgba(255,255,255,.08) 45%, rgba(0,0,0,.35) 55%, transparent);}
+.backcov{border-radius:5px 2px 2px 5px}
+.backcov::before{content:"";position:absolute;right:0;top:0;bottom:0;width:7%;background:linear-gradient(270deg, rgba(0,0,0,.55), rgba(255,255,255,.08) 45%, rgba(0,0,0,.35) 55%, transparent)}
+.gilt-frame{position:absolute;inset:7% 8% 7% 12%;border:2px solid var(--gilt);box-shadow:0 0 0 5px transparent, inset 0 0 0 5px transparent;opacity:.92}
+.backcov .gilt-frame{inset:7% 12% 7% 8%}
+.gilt-frame::before{content:"";position:absolute;inset:6px;border:1px solid var(--gilt);opacity:.8}
+.gilt-frame .c{position:absolute;width:13%;aspect-ratio:1;border:2px solid var(--gilt);border-radius:50%;background:radial-gradient(circle, var(--gilt) 0 18%, transparent 20%)}
+.c.tl{left:-6.5%;top:-4.5%}.c.tr{right:-6.5%;top:-4.5%}.c.bl{left:-6.5%;bottom:-4.5%}.c.br{right:-6.5%;bottom:-4.5%}
+.gilt-text,.cv-title,.cv-level,.cv-school,.cv-year,.cv-group,.cv-orn,.bc-orn{
+  background:linear-gradient(170deg, var(--gilt-lt) 10%, var(--gilt) 40%, var(--gilt-dk) 60%, var(--gilt-lt) 85%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.6)) drop-shadow(0 -1px 0 rgba(255,230,170,.12))}
+.cv{position:absolute;inset:12% 12% 12% 16%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:calc(var(--pw) * .034)}
+.cv-school{font-family:var(--fellsc);font-size:1.15em;letter-spacing:.2em}
+.cv-orn{font-size:2em;margin:.5em 0 .3em;font-family:var(--fell)}
+.cv-title{font-family:var(--fell);font-size:3em;line-height:.98}
+.cv-level{font-family:var(--fell);font-size:6.6em;line-height:1;margin:.12em 0 0;letter-spacing:-.02em}
+.cv-group{font-family:var(--fellsc);font-size:1.3em;letter-spacing:.12em}
+.cv-year{font-family:var(--fellsc);font-size:.95em;letter-spacing:.18em;margin-top:1.8em}
+.cv-hint{position:absolute;left:0;right:0;bottom:3.2%;text-align:center;font-family:var(--fell);font-style:italic;font-size:calc(var(--pw)*.03);color:var(--gilt-lt);opacity:.0;animation:hint 3.2s 2.2s infinite ease-in-out}
+@keyframes hint{0%,100%{opacity:.15;transform:translateY(0)}50%{opacity:.85;transform:translateY(-3px)}}
+.bc-orn{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(var(--pw)*.16);font-family:var(--fell)}
+
+/* ---------- endpapers ---------- */
+.endpaper{position:absolute;inset:0;background:var(--m1)}
+.marble{position:absolute;inset:0;width:100%;height:100%}
+.marble .m1{fill:var(--m1)}.marble .m2{fill:var(--m2)}.marble .m3{fill:var(--m3)}.marble .m4{fill:var(--m4)}
+.endpaper::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 calc(var(--pw)*.08) rgba(0,0,0,.55)}
+
+/* ---------- paper ---------- */
+.paper{position:absolute;inset:0;color:var(--ink);
+  background:
+    radial-gradient(circle at 82% 14%, rgba(150,95,40,.16) 0 3%, transparent 9%),
+    radial-gradient(circle at 12% 88%, rgba(150,95,40,.13) 0 2.5%, transparent 8%),
+    radial-gradient(circle at 70% 76%, rgba(150,95,40,.08) 0 1.5%, transparent 5%),
+    radial-gradient(ellipse 120% 100% at 50% 50%, transparent 60%, rgba(120,80,35,.28) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .24  0 0 0 0 .12  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+    var(--paper)}
+.paper.r::before,.paper.l::before{content:"";position:absolute;top:0;bottom:0;width:11%;pointer-events:none}
+.paper.r::before{left:0;background:linear-gradient(90deg, rgba(70,45,20,.38), rgba(70,45,20,.08) 45%, transparent)}
+.paper.l::before{right:0;background:linear-gradient(270deg, rgba(70,45,20,.38), rgba(70,45,20,.08) 45%, transparent)}
+.pg{position:absolute;inset:0;display:flex;flex-direction:column;font-family:var(--body);font-size:var(--fs);line-height:1.4;padding:7.5% 9.5% 5.5% 12%}
+.paper.l .pg{padding:7.5% 12% 5.5% 9.5%}
+.run{font-family:var(--fell);font-style:italic;font-size:.74em;color:var(--ink-soft);text-align:center;padding-bottom:.35em;margin-bottom:.9em;border-bottom:1px solid rgba(94,76,58,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.run.blank{visibility:hidden}
+.body{flex:1;min-height:0;overflow:hidden;position:relative}
+.folio{font-family:var(--fell);font-size:.8em;text-align:center;color:var(--ink-soft);padding-top:.5em}
+.folio::before,.folio::after{content:"·";margin:0 .6em;opacity:.6}
+
+.chnum{font-family:var(--fellsc);font-size:.82em;color:var(--gilt-dk);letter-spacing:.06em}
+h2.ch{font-family:var(--fell);font-weight:400;font-size:1.95em;line-height:1.02;color:var(--accent);margin:.05em 0 .5em;text-wrap:balance}
+h3{font-family:var(--fell);font-weight:400;font-size:1.12em;color:var(--accent);margin:0 0 .15em;line-height:1.15}
+h3.sub{margin:.7em 0 .3em;font-size:1.15em}
+.centre{text-align:center}
+p{margin:0 0 .55em;hyphens:auto;-webkit-hyphens:auto;text-align:justify}
+.dc::first-letter{font-family:var(--fell);float:left;font-size:3.05em;line-height:.82;padding:.06em .08em 0 0;color:var(--accent)}
+.lead{font-size:1.05em}
+.aside{font-style:italic;color:var(--ink-soft);font-size:.93em}
+.tight{margin-top:.5em}
+a{color:var(--accent);text-decoration-color:rgba(0,0,0,.25);text-underline-offset:.15em}
+a:hover{text-decoration-color:var(--accent)}
+em{font-style:italic}
+.fleuron{text-align:center;font-family:var(--fell);color:var(--gilt-dk);font-size:1.4em;margin:.3em 0}
+.fleuron.big{font-size:2.3em}
+.rule-orn{display:flex;align-items:center;gap:.6em;color:var(--gilt-dk);margin:.7em auto;width:70%}
+.rule-orn span{flex:1;height:1px;background:linear-gradient(90deg, transparent, var(--gilt-dk), transparent)}
+.tp-lab{font-family:var(--fellsc);color:var(--gilt-dk);font-size:.9em;margin-right:.25em}
+
+/* live entrance */
+.face .pg .body > *{transition:opacity .6s ease, transform .6s cubic-bezier(.25,.46,.45,.94)}
+
+/* title page */
+.titlepage{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.tp-top{font-family:var(--fellsc);letter-spacing:.08em;color:var(--ink-soft);font-size:.95em}
+.tp-title{font-family:var(--fell);font-weight:400;font-size:2.9em;line-height:1;color:var(--accent);margin:.1em 0 .15em}
+.tp-sub{font-family:var(--fell);font-style:italic;color:var(--ink-soft)}
+.tp-year{font-family:var(--fell);font-size:1.6em}
+.tp-level{font-family:var(--fell);font-size:2.2em;color:var(--accent)}
+.tp-group{font-family:var(--fellsc);letter-spacing:.1em;color:var(--ink-soft)}
+.tp-foot{margin-top:2.2em;font-family:var(--fell);font-size:1.1em}
+.tp-foot i{color:var(--ink-soft);font-size:.85em}
+
+/* contents */
+.toc-h{font-size:2.4em;margin:.4em 0 0}
+.tocl{list-style:none;padding:0;margin:.6em 0 0}
+.toc{display:flex;align-items:baseline;gap:.5em;width:100%;background:none;border:0;padding:.28em .2em;cursor:pointer;text-align:left;font-family:var(--body);font-size:1.02em;border-radius:3px;transition:transform .2s, background .2s}
+.toc b{font-family:var(--fell);font-weight:400;color:var(--gilt-dk);width:2.1em;text-align:right;flex:none}
+.toc-dots{flex:1;border-bottom:1.5px dotted rgba(94,76,58,.5);transform:translateY(-.3em)}
+.toc-p{font-family:var(--fell);color:var(--ink-soft)}
+.toc:hover,.toc:focus-visible{background:rgba(120,80,35,.1);transform:translateX(.25em)}
+.toc:hover .toc-t{color:var(--accent)}
+
+/* bookplate */
+.bookplate{position:relative;margin:.6em auto 0;width:92%;padding:1.2em 1.4em 1em;border:2px solid var(--accent);outline:1px solid var(--accent);outline-offset:-7px;background:rgba(255,250,235,.35);text-align:center}
+.bp-exlibris{font-family:var(--fell);font-style:italic;font-size:1.9em;color:var(--accent);line-height:1}
+.bp-name input{font-family:var(--hand);font-size:1.02em;color:#2d2a55;width:100%;text-align:center;background:none;border:0;border-bottom:1px solid rgba(94,76,58,.5);padding:.6em 0 .25em;margin:.2em 0 .7em;outline:none}
+.bp-name input::placeholder{color:rgba(94,76,58,.5);font-size:.78em}
+.bp-name input:focus{border-bottom-color:var(--accent)}
+.bp-dl{display:grid;grid-template-columns:auto 1fr;gap:.18em 1em;margin:0;text-align:left}
+.bp-dl dt{font-family:var(--fellsc);color:var(--gilt-dk);text-align:right}
+.bp-dl dd{margin:0}
+.bp-orn{font-family:var(--fell);color:var(--accent);font-size:1.6em;margin-top:.2em}
+
+/* tally */
+.tally{display:flex;flex-wrap:wrap;gap:.1em .25em;margin:.5em 0 .3em;justify-content:center}
+.tally svg{width:1.65em;height:1.65em;overflow:visible}
+.tally path{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:40;stroke-dashoffset:40}
+.tally .kept{stroke:var(--ink)}
+.tally .spare{stroke:var(--red);opacity:.55}
+.face.live .tally path{animation:draw .25s forwards;animation-delay:calc(var(--i) * 22ms + 250ms)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.tally-key{display:flex;justify-content:center;gap:1.3em;font-size:.86em;margin-bottom:.6em;font-style:italic}
+.tally-key span::before{content:"";display:inline-block;width:1.2em;height:2px;margin-right:.4em;vertical-align:middle}
+.k-kept::before{background:var(--ink)}.k-spare::before{background:var(--red)}
+
+/* blended */
+.halves{float:right;width:4.4em;margin:.1em 0 .3em .9em;text-align:center}
+.halves svg{width:100%}
+.h-ring{fill:none;stroke:var(--gilt-dk);stroke-width:2}
+.h-a{fill:var(--accent)}.h-b{fill:rgba(120,80,35,.22)}.h-line{stroke:var(--paper);stroke-width:2}
+.halves figcaption{display:flex;justify-content:space-between;font-size:.62em;font-family:var(--fellsc);line-height:1.1}
+.halves .h-lab-a{color:var(--accent)}
+.clause{border-left:3px solid var(--accent);padding:0 0 0 .75em;margin:.3em 0}
+.clause p{margin:0}
+.covenant{display:flex;align-items:center;gap:1em;margin-top:.5em;padding-top:.5em;border-top:1px solid rgba(94,76,58,.35)}
+.covenant p{margin:0;font-style:italic}
+
+/* wax */
+.wax{flex:none;width:3.6em;height:3.6em;border-radius:48% 52% 50% 46%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%, #d0544a, #9b2b25 45%, #5d1511 100%);
+  box-shadow:0 .15em .3em rgba(60,10,5,.5), inset 0 0 0 .32em rgba(0,0,0,.18), inset 0 0 0 .42em rgba(255,160,140,.15)}
+.wax span{font-family:var(--fell);color:#f1c9b8;font-size:1.05em;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.wax.small{width:2.8em;height:2.8em}.wax.small span{font-size:.85em}
+
+/* materials */
+.coursebook{position:relative;display:flex;gap:1em;align-items:flex-start;margin:.2em 0 .3em}
+.cb-cover{flex:none;width:4.6em;height:6.2em;border-radius:2px 4px 4px 2px;background:linear-gradient(90deg, rgba(0,0,0,.35), transparent 14%), var(--leather);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--gilt-lt);box-shadow:.2em .25em .4em rgba(40,25,10,.4);transform:rotate(-3deg);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.coursebook:hover .cb-cover{transform:rotate(0) translateY(-.2em)}
+.cb-t{font-family:var(--fellsc);font-size:.62em}.cb-l{font-family:var(--fell);font-size:1.5em;line-height:1}.cb-e{font-size:.5em;font-style:italic}
+.cb-text h3 small{font-size:.72em;color:var(--ink-soft)}
+.cite{text-align:left;font-size:.9em;margin:.2em 0 .1em;hyphens:none}
+.isbn{font-size:.84em;color:var(--ink-soft);margin:0;letter-spacing:.02em}
+.stamp{position:absolute;right:.5em;bottom:-.9em;font-family:var(--fellsc);color:var(--red);border:2px solid var(--red);padding:.05em .5em;border-radius:3px;transform:rotate(-9deg);opacity:.82;font-size:1em;letter-spacing:.06em;box-shadow:inset 0 0 0 2px rgba(155,43,37,.25)}
+.face.live .stamp{animation:stamp .45s .9s both cubic-bezier(.34,1.56,.64,1)}
+@keyframes stamp{from{transform:rotate(-9deg) scale(2.2);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:.82}}
+.readings{display:grid;grid-template-columns:1fr;gap:.35em}
+.term-lab{font-family:var(--fellsc);color:var(--gilt-dk);font-size:.9em}
+.stories{list-style:none;padding:0;margin:.05em 0 0}
+.stories li{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;padding:.08em 0;border-bottom:1px dotted rgba(94,76,58,.35)}
+.st-title{font-size:1.04em}.st-auth{font-style:italic;color:var(--ink-soft);font-size:.9em}
+
+.shelf{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:.25em;height:10.5em;margin:.6em 0 0;padding-bottom:.55em}
+.shelf-plank{position:absolute;left:4%;right:4%;bottom:0;height:.6em;background:linear-gradient(#6b4a2a,#3e2a17);border-radius:2px;box-shadow:0 .3em .5em rgba(40,25,10,.35)}
+.spine{position:relative;writing-mode:vertical-rl;transform-origin:bottom center;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4em;padding:.6em .1em;color:var(--gilt-lt);border-radius:3px 3px 1px 1px;
+  box-shadow:inset .25em 0 .3em rgba(255,255,255,.12), inset -.3em 0 .35em rgba(0,0,0,.4), .15em 0 .25em rgba(40,25,10,.35);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.spine span{font-family:var(--fell);font-size:.86em;white-space:nowrap}
+.spine small{font-family:var(--fellsc);font-size:.62em;opacity:.8;white-space:nowrap}
+.spine::before,.spine::after{content:"";position:absolute;left:12%;right:12%;height:2px;background:var(--gilt)}
+.spine::before{top:.45em}.spine::after{bottom:.45em}
+.s0{width:2.7em;height:9.6em;background:#6e2a22}
+.s1{width:3.1em;height:10.2em;background:#24413a}
+.s2{width:2.5em;height:8.6em;background:#3a3150}
+.spine:hover{transform:translateY(-.35em)}
+.spine[aria-pressed="true"]{transform:translateY(-.9em) rotate(-4deg)}
+.spine:active{transform:scale(.96)}
+.refcard{margin-top:.8em;min-height:4.4em;padding:.6em .8em;border:1px solid rgba(94,76,58,.4);background:rgba(255,250,235,.4);position:relative}
+.refcite{display:none;margin:0;text-align:left;hyphens:none}
+.refcite.on{display:block;animation:rise .4s both}
+@keyframes rise{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+
+.redacted{display:flex;gap:.45em;align-items:center;padding:.32em 0 !important}
+.ink{display:block;height:.95em;background:#1c1510;border-radius:1px;transform:rotate(-.4deg);box-shadow:0 0 0 .5px rgba(28,21,16,.6);
+  clip-path:polygon(0 8%,3% 0,40% 6%,72% 0,100% 10%,98% 92%,64% 100%,30% 94%,2% 100%)}
+.ink.thin{opacity:.9;transform:rotate(.5deg)}
+.redacted:nth-child(2) .ink{transform:rotate(.3deg)}
+.declass{border-bottom:0 !important;font-style:italic;color:var(--red);font-size:.88em;justify-content:flex-end}
+.face.live .ink{animation:redact .5s both cubic-bezier(.25,.46,.45,.94);transform-origin:left}
+.face.live .redacted:nth-child(2) .ink{animation-delay:.25s}.face.live .redacted:nth-child(3) .ink{animation-delay:.5s}
+@keyframes redact{from{clip-path:polygon(0 8%,0 0,0 6%,0 0,0 10%,0 92%,0 100%,0 94%,0 100%)}}
+.epigraph p{font-size:1.45em}
+
+/* terms */
+.ttabs{display:flex;gap:.4em;margin:.5em 0 0}
+.ttab{flex:1;background:rgba(120,80,35,.08);border:1px solid rgba(94,76,58,.35);border-bottom:0;border-radius:.5em .5em 0 0;padding:.35em .2em .3em;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.1;transition:transform .2s, background .25s}
+.ttab b{font-family:var(--fell);font-weight:400;font-size:1.35em;color:var(--gilt-dk)}
+.ttab span{font-size:.78em;color:var(--ink-soft)}
+.ttab:hover{transform:translateY(-.15em)}
+.ttab[aria-selected="true"]{background:var(--accent);border-color:var(--accent)}
+.ttab[aria-selected="true"] b{color:var(--gilt-lt)}.ttab[aria-selected="true"] span{color:#efe3cc}
+.tpanels{border:1px solid rgba(94,76,58,.35);border-top:3px solid var(--accent);padding:.8em .9em .7em;background:rgba(255,250,235,.3)}
+.tpanel{display:none}.tpanel.on{display:block;animation:rise .45s both}
+.tp-dates{font-family:var(--fell);font-size:1.35em;color:var(--accent);line-height:1.1}
+.tp-units{font-family:var(--fellsc);color:var(--gilt-dk);margin:.1em 0 .45em}
+.tp-can{margin:0;text-align:left;hyphens:manual}
+.tp-now{display:none;margin-top:.5em;font-style:italic;color:var(--red);font-size:.9em}
+.tpanel.now .tp-now{display:block}
+
+/* assessment */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:.7em;margin:.2em 0}
+.way{position:relative;padding:.5em .6em .3em;border:1px solid rgba(94,76,58,.35);background:rgba(255,250,235,.3)}
+.way b{position:absolute;right:.4em;top:-.1em;font-family:var(--fell);font-weight:400;font-style:italic;font-size:2em;color:rgba(120,80,35,.28)}
+.way p{text-align:left;font-size:.9em;margin:0;hyphens:manual}
+.dials{display:flex;justify-content:space-around;gap:.5em}
+.dial{margin:0;width:44%;text-align:center}
+.dial svg{width:100%;overflow:visible}
+.dial .arc{fill:none;stroke:rgba(94,76,58,.22);stroke-width:7}
+.dial .arcfill{fill:none;stroke:var(--accent);stroke-width:7;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.2s .4s cubic-bezier(.25,.46,.45,.94)}
+.face.live .dial .arcfill{stroke-dashoffset:calc(100 - var(--v))}
+.dial .ticks line{stroke:var(--gilt-dk);stroke-width:1}
+.dial .needle{stroke:var(--red);stroke-width:2.2;stroke-linecap:round;transform-origin:50px 50px;transform:rotate(-90deg);transition:transform 1.4s .4s cubic-bezier(.34,1.56,.64,1)}
+.face.live .dial .needle{transform:rotate(var(--r))}
+.dial .hub{fill:var(--ink)}
+.dial figcaption{margin-top:-.2em;line-height:1.05}
+.dial figcaption b{font-family:var(--fell);font-weight:400;font-size:1.7em;color:var(--accent)}
+.dial figcaption span{color:var(--ink-soft)}
+.dial figcaption small{display:block;font-style:italic;font-size:.82em;color:var(--ink-soft)}
+.certif{display:flex;gap:.9em;align-items:center;margin-top:.7em}
+.certif p{margin:0}
+.face.live .wax{animation:press .6s .8s both cubic-bezier(.34,1.56,.64,1)}
+@keyframes press{from{transform:scale(1.6) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+.scales{float:right;width:36%;margin:.1em 0 0 .8em;text-align:center}
+.scales svg{width:100%;overflow:visible}
+.sc-post{stroke:var(--gilt-dk);stroke-width:3;fill:none;stroke-linecap:round}
+.sc-beam line,.sc-beam path{stroke:var(--ink-soft);stroke-width:1.5;fill:none}
+.sc-beam .sc-pan{fill:var(--accent);stroke:none}
+.sc-beam{transform-origin:100px 16px;transform:rotate(-7deg)}
+.face.live .sc-beam{animation:balance 2.4s .3s both cubic-bezier(.34,1.56,.64,1)}
+@keyframes balance{0%{transform:rotate(-7deg)}40%{transform:rotate(4deg)}70%{transform:rotate(-1.5deg)}100%{transform:rotate(0)}}
+.sc-knob{fill:var(--gilt)}
+.scales figcaption{display:flex;justify-content:space-between;gap:.6em;line-height:1.1;font-family:var(--fellsc);font-size:.85em;margin-top:-.1em}
+.scales figcaption b{display:block;font-family:var(--fell);font-weight:400;font-size:1.3em;color:var(--accent)}
+.skills{list-style:none;margin:.1em 0 0;padding:0}
+.skills li{display:grid;grid-template-columns:4.9em 1fr;gap:.5em;padding:.04em 0;font-size:.92em;line-height:1.22;border-bottom:1px dotted rgba(94,76,58,.35);line-height:1.28}
+.skills b{font-family:var(--fellsc);font-weight:400;color:var(--accent)}
+
+.ledger{margin-top:.1em}
+.lg-sec{font-family:var(--fellsc);color:var(--gilt-dk);font-size:.88em;margin:.35em 0 .05em;border-bottom:1px solid rgba(94,76,58,.45)}
+.lg-row,.lg-total{display:grid;grid-template-columns:1fr 3.6em 2em;gap:.4em;align-items:baseline;width:100%;padding:.2em .35em;background:none;border:0;border-bottom:1px dotted rgba(94,76,58,.35);text-align:left;font-family:var(--body);cursor:pointer;transition:background .2s, transform .2s}
+.lg-row:hover{background:rgba(120,80,35,.09)}
+.lg-row[aria-pressed="true"]{background:var(--accent);color:#f3e8d2}
+.lg-row[aria-pressed="true"] .lg-d{color:#d9c9ad}
+.lg-d{font-style:italic;color:var(--ink-soft);font-size:.9em}
+.lg-m{text-align:right;font-family:var(--fell);font-size:1.1em}
+.lg-total{cursor:default;border-bottom:3px double var(--ink-soft);font-family:var(--fellsc)}
+.marksbar{position:relative;display:flex;height:.8em;margin:1.4em 0 .3em;border:1px solid var(--ink-soft)}
+.seg{display:block;height:100%;border-right:1px solid var(--paper);transition:filter .2s}
+.seg.w{background:var(--accent)}.seg.o{background:var(--gilt-dk)}
+.seg:nth-child(even).w{background:var(--accent-2)}
+.seg.hi{filter:brightness(1.35)}
+.pass{position:absolute;top:-.55em;bottom:-.3em;width:2px;background:var(--red)}
+.pass em{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72em;color:var(--red)}
+.lg-detail{min-height:4.6em;margin-top:.4em}
+.lg-what{display:none;margin:0;font-size:.95em;text-align:left;hyphens:none}
+.lg-what.on{display:block;animation:rise .35s both}
+
+.parts{margin:.2em 0 .4em}
+.part{margin:.2em 0 .35em}
+.part-h{display:flex;gap:.6em;align-items:baseline;line-height:1.25}
+.part-h b{font-family:var(--fell);font-weight:400;color:var(--accent);font-size:1.1em;flex:none}
+.part-h span{font-size:.92em}
+.part-h small{color:var(--ink-soft);font-style:italic}
+.part-bar{display:flex;align-items:center;gap:.5em;margin-top:.05em;line-height:1}
+.part-bar i{display:block;height:.42em;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:0 .3em .3em 0;transition:width 1.1s .3s cubic-bezier(.25,.46,.45,.94);max-width:80%}
+.face.live .part-bar i{width:calc(var(--w) * .8)}
+.part-bar em{font-family:var(--fell);font-style:italic;font-size:.9em;color:var(--ink-soft)}
+.three{margin:.1em 0 0;padding-left:1.4em}
+.three li{margin:.1em 0;line-height:1.3}
+.three li::marker{font-family:var(--fell);color:var(--accent)}
+
+/* dates */
+.timeline{list-style:none;margin:.1em 0 0;padding:0 0 0 .2em;position:relative}
+.timeline::before{content:"";position:absolute;left:.52em;top:.6em;bottom:.6em;width:2px;background:linear-gradient(var(--accent), var(--gilt-dk))}
+.dt{position:relative;display:grid;grid-template-columns:1.2em 1fr;gap:.45em;align-items:start;padding:.1em 0}
+.dt-dot{width:.7em;height:.7em;border-radius:50%;background:var(--paper);border:2px solid var(--accent);margin-top:.35em;position:relative;z-index:1}
+.dt-what{line-height:1.15}
+.dt-when{font-family:var(--fell);font-style:italic;color:var(--ink-soft);font-size:.9em;line-height:1.15}
+.dt-when em{font-size:.9em}
+.dt-count{font-family:var(--fellsc);font-size:.76em;color:var(--accent);white-space:nowrap;padding:.1em .45em;border:1px solid rgba(94,76,58,.35);border-radius:1em;font-style:normal;display:inline-block;line-height:1.2;margin-left:.2em}
+.dt.next .dt-dot{background:var(--red);border-color:var(--red);box-shadow:0 0 0 .25em rgba(155,43,37,.18);animation:pulse 2.4s infinite}
+.dt.next .dt-count{background:var(--red);color:#f6e7d8;border-color:var(--red)}
+.dt.past{opacity:.5}.dt.past .dt-what{text-decoration:line-through;text-decoration-color:rgba(94,76,58,.6)}
+@keyframes pulse{50%{box-shadow:0 0 0 .45em rgba(155,43,37,0)}}
+.finalexam{margin:.4em 0 0;padding:.4em .7em;border:2px solid var(--accent);outline:1px solid var(--accent);outline-offset:-5px;font-family:var(--fell);line-height:1.2}
+
+/* moodle */
+.steps{margin:.2em 0 0;padding-left:1.5em;counter-reset:none}
+.steps li{margin:.35em 0;line-height:1.35;padding-left:.15em}
+.steps li::marker{font-family:var(--fell);color:var(--accent);font-size:1.1em}
+.steps.small li{margin:.12em 0}
+.mono{font-family:var(--fell);background:rgba(120,80,35,.12);padding:0 .3em;border-radius:2px;white-space:nowrap}
+.keyseal{display:flex;align-items:center;gap:.8em;margin:.6em 0 0;padding:.4em 1em .4em .4em;background:rgba(255,250,235,.45);border:1px dashed var(--ink-soft);border-radius:3em;cursor:pointer;position:relative;transition:transform .15s}
+.keyseal:hover{transform:translateY(-.15em)}
+.keyseal:active{transform:scale(.96)}
+.ks-wax{width:2.8em;height:2.8em;border-radius:48% 52% 50% 46%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%, #d0544a, #9b2b25 45%, #5d1511 100%);box-shadow:0 .1em .25em rgba(60,10,5,.5), inset 0 0 0 .3em rgba(0,0,0,.18);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.ks-wax span{font-family:var(--fellsc);font-size:.62em;color:#f1c9b8}
+.ks-key{font-family:var(--fell);font-size:1.45em;letter-spacing:.06em;color:var(--accent)}
+.ks-done{position:absolute;right:.6em;top:-.9em;font-family:var(--hand);font-size:.72em;color:var(--red);opacity:0;transform:rotate(-6deg)}
+.keyseal.copied .ks-wax{transform:rotate(360deg) scale(1.08)}
+.keyseal.copied .ks-done{animation:ink 2s both}
+@keyframes ink{0%{opacity:0;transform:rotate(-6deg) translateY(.3em)}15%,70%{opacity:1;transform:rotate(-6deg)}100%{opacity:0}}
+.pending{display:block;margin-top:.5em;padding:.35em .6em;border:2px dashed var(--red);color:var(--red);font-style:italic;text-align:center}
+.photo-note{display:flex;gap:.7em;align-items:center;text-align:left;margin:.6em 0}
+.frame{flex:none;width:2.6em;height:3.1em;border:3px double var(--gilt-dk);border-radius:50% / 45%;display:grid;place-items:center;background:rgba(255,250,235,.4)}
+.frame svg{width:65%;fill:none;stroke:var(--ink-soft);stroke-width:2.5}
+.hub{border-top:1px solid rgba(94,76,58,.35);padding-top:.5em;margin-top:.4em}
+
+/* tutorials */
+.twoways{display:grid;grid-template-columns:1fr 1fr;gap:.8em;margin:.6em 0}
+.twoways > div{padding:.5em .7em;background:rgba(255,250,235,.35);border-top:3px solid var(--accent);box-shadow:0 .1em .3em rgba(40,25,10,.12)}
+.twoways > div:nth-child(2){border-top-color:var(--gilt-dk);transform:translateY(.6em)}
+.twoways p{text-align:left;margin:0;font-size:.95em}
+.caution{margin:.7em 0 0;padding:.6em .9em;border-left:4px solid var(--red);background:rgba(155,43,37,.07);font-family:var(--fell);font-style:italic;font-size:1.08em;line-height:1.3}
+
+/* keep reading */
+.stack{position:relative;height:6.2em;margin:.3em auto .5em;width:11em}
+.bk{position:absolute;left:50%;height:1.05em;border-radius:2px;box-shadow:inset 0 -.15em 0 rgba(0,0,0,.25), 0 .1em .15em rgba(40,25,10,.3)}
+.bk::after{content:"";position:absolute;top:.3em;bottom:.3em;left:18%;width:1.2em;border-left:2px solid var(--gilt);border-right:2px solid var(--gilt)}
+.b1{bottom:0;width:10.5em;margin-left:-5.25em;background:#6e2a22}
+.b2{bottom:1.05em;width:9.4em;margin-left:-4.5em;background:var(--leather)}
+.b3{bottom:2.1em;width:10em;margin-left:-5.3em;background:#24413a}
+.b4{bottom:3.15em;width:8.6em;margin-left:-4.1em;background:#5b4a2a}
+.b5{bottom:4.2em;width:9em;margin-left:-4.7em;background:#3a3150;transform-origin:left bottom}
+.face.live .b5{animation:wobble 3.8s 1s infinite ease-in-out}
+@keyframes wobble{0%,100%{transform:rotate(0)}6%{transform:rotate(-3deg)}12%{transform:rotate(1deg)}18%{transform:rotate(0)}}
+.btn-link{display:inline-block;margin-top:.3em;padding:.45em .9em;border:1px solid var(--accent);background:var(--accent);color:#f3e8d2;text-decoration:none;font-family:var(--fell);border-radius:2px;box-shadow:0 .15em 0 var(--leather-dk);transition:transform .15s, box-shadow .15s}
+.btn-link:hover{transform:translateY(-.1em);box-shadow:0 .25em 0 var(--leather-dk)}
+.btn-link:active{transform:translateY(.1em);box-shadow:0 0 0 var(--leather-dk)}
+
+.biblio{list-style:none;padding:0;margin:.2em 0 .3em}
+.biblio li{padding:.22em 0 .22em 1.1em;border-bottom:1px dotted rgba(94,76,58,.35);line-height:1.25;position:relative}
+.biblio li::before{content:"§";position:absolute;left:0;color:var(--gilt-dk);font-family:var(--fell)}
+.biblio span{display:block;font-size:.84em;font-style:italic;color:var(--ink-soft)}
+
+.epigraph{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 5%}
+.epigraph p{font-family:var(--fell);font-style:italic;font-size:1.55em;line-height:1.3;text-align:center;color:var(--accent);hyphens:none}
+.epigraph cite{font-style:normal;font-family:var(--fellsc);color:var(--ink-soft)}
+.colophon{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.finis{font-family:var(--fell);font-style:italic;font-size:3.4em;color:var(--accent);line-height:1}
+.hope{font-family:var(--fell);font-size:1.35em;text-align:center;margin:.4em 0 0}
+.colo-small{font-family:var(--fellsc);color:var(--ink-soft);text-align:center;font-size:.9em}
+.credit{margin-top:2.2em;font-style:italic;font-size:.85em;color:var(--ink-soft);text-align:center}
+
+/* ---------- ribbon ---------- */
+.ribbon{position:absolute;top:calc(var(--ph) - 2px);width:calc(var(--pw) * .045);height:calc(var(--ph) * .07);pointer-events:none;transform-origin:top center;animation:sway 6s infinite ease-in-out;transition:left .85s cubic-bezier(.45,.05,.25,1), opacity .5s;z-index:0;
+  background:linear-gradient(90deg, rgba(0,0,0,.25), transparent 40%, rgba(255,255,255,.12) 60%, rgba(0,0,0,.2)), var(--ribbon);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 84%,0 100%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.5))}
+@keyframes sway{0%,100%{transform:rotate(2deg)}50%{transform:rotate(-3deg)}}
+
+/* ---------- controls ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;height:var(--bar);display:flex;align-items:center;justify-content:center;gap:.6rem;font-family:var(--fell);color:var(--gilt-lt);padding:0 .8rem calc(env(safe-area-inset-bottom)*.5);opacity:0;transition:opacity 1s .8s}
+body.ready .bar{opacity:1}
+.bar button{background:rgba(20,13,8,.6);border:1px solid rgba(217,180,106,.35);color:var(--gilt-lt);height:42px;min-width:42px;padding:0 .9rem;border-radius:21px;cursor:pointer;font-family:var(--fell);font-size:1rem;display:inline-flex;align-items:center;gap:.4rem;transition:transform .15s, background .2s, border-color .2s}
+.bar button:hover{background:rgba(60,40,20,.75);border-color:var(--gilt);transform:translateY(-2px)}
+.bar button:active{transform:scale(.95)}
+.bar button:disabled{opacity:.3;cursor:default;transform:none}
+.bar button:focus-visible,.toc:focus-visible,.lg-row:focus-visible,.ttab:focus-visible,.spine:focus-visible,.keyseal:focus-visible{outline:2px solid var(--gilt);outline-offset:2px}
+.bar .arrow{font-size:1.35rem;padding:0 .7rem}
+.where{min-width:12rem;text-align:center;font-style:italic;font-size:1rem;color:var(--gilt-lt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.where small{display:block;font-style:normal;font-family:var(--fellsc);font-size:.75rem;color:rgba(243,220,158,.6);letter-spacing:.06em}
+.keyhint{position:fixed;top:14px;right:18px;font-family:var(--fell);font-style:italic;color:rgba(243,220,158,.55);font-size:.9rem;transition:opacity 1s}
+.keyhint.gone{opacity:0}
+body.single .where{min-width:0;flex:1}
+body.single .bar .fs,body.single .keyhint{display:none}
+
+@media (prefers-reduced-motion: reduce){
+  .candle,.cv-hint,.ribbon,.dt.next .dt-dot,.face.live .b5{animation:none}
+  #dust{display:none}
+  .face .pg .body > *{transition:none}
+}
+</style>
+</head>
+<body class="lv22">
+<div class="room" aria-hidden="true"><div class="candle"></div><canvas id="dust"></canvas><div class="vignette"></div></div>
+<main class="stage">
+  <div id="clip" data-group="B2.2-16B">
+    <div class="block" id="block"><div class="edges l" id="edgeL"></div><div class="edges" id="edgeR"></div></div>
+    <div class="ribbon" id="ribbon"></div>
+    <div id="book">
+<div class="leaf" data-k="0"><div class="face front" data-face="0" data-title=""><div class="leather cover"><div class="gilt-frame"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
+<div class="cv"><div class="cv-school">E·O·I Salou</div><div class="cv-orn">❦</div><div class="cv-title">Information<br>Sheet</div>
+<div class="cv-level">B2.2</div><div class="cv-group">Group 16B</div><div class="cv-year">MMXXVI – MMXXVII</div></div>
+<div class="cv-hint">Open the book</div></div><div class="shade"></div></div><div class="face back" data-face="1" data-title="Endpapers"><div class="endpaper"><svg class="marble" viewBox="0 0 400 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><filter id="mb1" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.018" numOctaves="3" seed="10"/><feDisplacementMap in="SourceGraphic" scale="140"/></filter>
+<pattern id="st1" width="400" height="46" patternUnits="userSpaceOnUse"><rect width="400" height="46" class="m1"/><rect y="12" width="400" height="9" class="m2"/><rect y="25" width="400" height="4" class="m3"/><rect y="33" width="400" height="7" class="m4"/></pattern></defs>
+<g filter="url(#mb1)"><rect x="-80" y="-80" width="560" height="720" fill="url(#st1)" transform="rotate(-18 200 280)"/></g></svg></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="1"><div class="face front" data-face="2" data-title="Title page"><div class="paper r"><div class="pg"><div class="run">Title page</div><div class="body"><div class="titlepage">
+<div class="tp-top">Escola Oficial d'Idiomes de Salou</div>
+<div class="fleuron big">❦</div>
+<h1 class="tp-title">Information Sheet</h1>
+<div class="tp-sub">for the school year</div>
+<div class="tp-year">2026–2027</div>
+<div class="rule-orn"><span></span>✦<span></span></div>
+<div class="tp-level">English B2.2</div>
+<div class="tp-group">Group B2.2-16B</div>
+<div class="tp-foot"><i>taught by</i><br>Anna Singla</div></div></div><div class="folio">1</div></div></div><div class="shade"></div></div><div class="face back" data-face="3" data-title="Contents"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><h2 class="ch centre toc-h">Contents</h2><div class="fleuron">❦</div><ol class="tocl"><li><button class="toc" data-go="4"><b>I</b><span class="toc-t">The course</span><span class="toc-dots"></span><span class="toc-p">3</span></button></li><li><button class="toc" data-go="5"><b>II</b><span class="toc-t">Classes and attendance</span><span class="toc-dots"></span><span class="toc-p">4</span></button></li><li><button class="toc" data-go="6"><b>III</b><span class="toc-t">Materials</span><span class="toc-dots"></span><span class="toc-p">5</span></button></li><li><button class="toc" data-go="8"><b>IV</b><span class="toc-t">What you will learn</span><span class="toc-dots"></span><span class="toc-p">7</span></button></li><li><button class="toc" data-go="9"><b>V</b><span class="toc-t">Assessment</span><span class="toc-dots"></span><span class="toc-p">8</span></button></li><li><button class="toc" data-go="13"><b>VI</b><span class="toc-t">Important dates</span><span class="toc-dots"></span><span class="toc-p">12</span></button></li><li><button class="toc" data-go="14"><b>VII</b><span class="toc-t">Moodle and the Oxford English Hub</span><span class="toc-dots"></span><span class="toc-p">13</span></button></li><li><button class="toc" data-go="16"><b>VIII</b><span class="toc-t">Tutorials and support</span><span class="toc-dots"></span><span class="toc-p">15</span></button></li><li><button class="toc" data-go="18"><b>IX</b><span class="toc-t">Keep reading</span><span class="toc-dots"></span><span class="toc-p">17</span></button></li><li><button class="toc" data-go="19"><b>X</b><span class="toc-t">Bibliographical note</span><span class="toc-dots"></span><span class="toc-p">18</span></button></li></ol></div><div class="folio">2</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="2"><div class="face front" data-face="4" data-title="The course"><div class="paper r"><div class="pg"><div class="run">The course</div><div class="body"><div class="chnum">Chapter the First</div><h2 class="ch">The course</h2><div class="bookplate">
+<div class="bp-exlibris">Ex libris</div>
+<label class="bp-name"><span class="sr">Your name</span><input data-noturn id="bpname" maxlength="40" placeholder="write your name here" autocomplete="off" spellcheck="false"></label>
+<dl class="bp-dl">
+<dt>Level</dt><dd>B2.2</dd><dt>Group</dt><dd>B2.2-16B</dd><dt>Mode</dt><dd>Face-to-face</dd>
+<dt>Days</dt><dd>Tuesdays and Thursdays</dd><dt>Time</dt><dd>16:00–18:15</dd><dt>Room</dt><dd>1</dd><dt>Teacher</dt><dd>Anna Singla</dd></dl>
+<div class="bp-orn">❧</div></div></div><div class="folio">3</div></div></div><div class="shade"></div></div><div class="face back" data-face="5" data-title="Classes and attendance"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Second</div><h2 class="ch">Classes and attendance</h2><p class="lead dc">A minimum of 65% attendance is recommended for continuous assessment, to keep track of your progress.</p><div class="tally"><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:0" d="M4,3 L3,29"/><path class="kept" style="--i:1" d="M10,3 L11,29"/><path class="kept" style="--i:2" d="M16,3 L15,29"/><path class="kept" style="--i:3" d="M22,3 L23,29"/><path class="kept" style="--i:4" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:5" d="M4,3 L3,29"/><path class="kept" style="--i:6" d="M10,3 L11,29"/><path class="kept" style="--i:7" d="M16,3 L15,29"/><path class="kept" style="--i:8" d="M22,3 L23,29"/><path class="kept" style="--i:9" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:10" d="M4,3 L3,29"/><path class="kept" style="--i:11" d="M10,3 L11,29"/><path class="kept" style="--i:12" d="M16,3 L15,29"/><path class="kept" style="--i:13" d="M22,3 L23,29"/><path class="kept" style="--i:14" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:15" d="M4,3 L3,29"/><path class="kept" style="--i:16" d="M10,3 L11,29"/><path class="kept" style="--i:17" d="M16,3 L15,29"/><path class="kept" style="--i:18" d="M22,3 L23,29"/><path class="kept" style="--i:19" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:20" d="M4,3 L3,29"/><path class="kept" style="--i:21" d="M10,3 L11,29"/><path class="kept" style="--i:22" d="M16,3 L15,29"/><path class="kept" style="--i:23" d="M22,3 L23,29"/><path class="kept" style="--i:24" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:25" d="M4,3 L3,29"/><path class="kept" style="--i:26" d="M10,3 L11,29"/><path class="kept" style="--i:27" d="M16,3 L15,29"/><path class="kept" style="--i:28" d="M22,3 L23,29"/><path class="kept" style="--i:29" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:30" d="M4,3 L3,29"/><path class="kept" style="--i:31" d="M10,3 L11,29"/><path class="kept" style="--i:32" d="M16,3 L15,29"/><path class="kept" style="--i:33" d="M22,3 L23,29"/><path class="kept" style="--i:34" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:35" d="M4,3 L3,29"/><path class="kept" style="--i:36" d="M10,3 L11,29"/><path class="kept" style="--i:37" d="M16,3 L15,29"/><path class="kept" style="--i:38" d="M22,3 L23,29"/><path class="kept" style="--i:39" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="kept" style="--i:40" d="M4,3 L3,29"/><path class="spare" style="--i:41" d="M10,3 L11,29"/><path class="spare" style="--i:42" d="M16,3 L15,29"/><path class="spare" style="--i:43" d="M22,3 L23,29"/><path class="spare" style="--i:44" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="spare" style="--i:45" d="M4,3 L3,29"/><path class="spare" style="--i:46" d="M10,3 L11,29"/><path class="spare" style="--i:47" d="M16,3 L15,29"/><path class="spare" style="--i:48" d="M22,3 L23,29"/><path class="spare" style="--i:49" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="spare" style="--i:50" d="M4,3 L3,29"/><path class="spare" style="--i:51" d="M10,3 L11,29"/><path class="spare" style="--i:52" d="M16,3 L15,29"/><path class="spare" style="--i:53" d="M22,3 L23,29"/><path class="spare" style="--i:54" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="spare" style="--i:55" d="M4,3 L3,29"/><path class="spare" style="--i:56" d="M10,3 L11,29"/><path class="spare" style="--i:57" d="M16,3 L15,29"/><path class="spare" style="--i:58" d="M22,3 L23,29"/><path class="spare" style="--i:59" d="M0,24 L28,8"/></svg><svg viewBox="-2 0 32 32" aria-hidden="true"><path class="spare" style="--i:60" d="M4,3 L3,29"/><path class="spare" style="--i:61" d="M10,3 L11,29"/></svg></div>
+<div class="tally-key"><span class="k-kept">41 sessions attended</span><span class="k-spare">21 you may miss</span></div>
+<p>For this group that means at least <b>41</b> of the course's 62 sessions — so you can miss at most <b>21</b> days.</p>
+<p class="aside">If you cannot be there for an assessment, tell your teacher <em>before</em> the date, not after, and bring proof; your teacher will try to find a solution. The dates of the final exams cannot be moved, except in cases of force majeure.</p></div><div class="folio">4</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="3"><div class="face front" data-face="6" data-title="Materials"><div class="paper r"><div class="pg"><div class="run">Materials</div><div class="body"><div class="chnum">Chapter the Third</div><h2 class="ch">Materials</h2>
+<div class="coursebook">
+<div class="cb-cover"><span class="cb-t">English File</span><span class="cb-l">C1</span><span class="cb-e">5th edition</span></div>
+<div class="cb-text"><h3>The student's book <small>(includes workbook)</small></h3><p class="cite">Latham-Koenig, C., Oxenden, C., Lambert, J., &amp; Chomacki, K. (2026). <i>English File C1</i> (5th ed.). Combined Student's Book and Workbook with Online Practice. Oxford University Press.</p><p class="isbn">ISBN 9780194147224</p></div>
+<div class="stamp" aria-label="Compulsory">Compulsory</div></div>
+<h3 class="sub">The readings</h3>
+<div class="readings"><div><div class="term-lab">First term · short stories</div><ul class="stories"><li class="redacted" aria-hidden="true"><i class="ink" style="width:52%"></i><i class="ink thin" style="width:22%"></i></li><li class="redacted" aria-hidden="true"><i class="ink" style="width:38%"></i><i class="ink thin" style="width:30%"></i></li><li class="redacted" aria-hidden="true"><i class="ink" style="width:61%"></i><i class="ink thin" style="width:17%"></i></li><li class="declass"><span class="sr">Three short stories, </span>to be declassified in class</li></ul></div>
+<div><div class="term-lab">Third term · a novel</div><ul class="stories"><li><span class="st-title"><i>The Uncommon Reader</i></span><span class="st-auth">Alan Bennett</span></li></ul></div></div></div><div class="folio">5</div></div></div><div class="shade"></div></div><div class="face back" data-face="7" data-title="Materials"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Third, continued</div><h2 class="ch">The reference shelf</h2>
+<p class="dc">These three reference books are worth knowing about as you work through the year. Take one down from the shelf to see its full details.</p>
+<div class="shelf" role="group" aria-label="Reference books"><button class="spine s0" data-ref="0" aria-pressed="true"><span>Objective First</span></button><button class="spine s1" data-ref="1" aria-pressed="false"><span>A Student's Grammar</span></button><button class="spine s2" data-ref="2" aria-pressed="false"><span>Language Practice</span></button><div class="shelf-plank"></div></div>
+<div class="refcard" aria-live="polite"><p class="refcite on" data-cite="0">Capel, A., &amp; Sharp, W. (2014). <i>Objective First. Student's Book with Answers.</i> Cambridge University Press.</p><p class="refcite" data-cite="1">Greenbaum, S., &amp; Quirk, R. (1990). <i>A Student's Grammar of the English Language.</i> Longman.</p><p class="refcite" data-cite="2">Vince, M., &amp; Emmerson, P. (2003). <i>First Certificate: Language Practice with Key.</i> Macmillan.</p></div></div><div class="folio">6</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="4"><div class="face front" data-face="8" data-title="What you will learn"><div class="paper r"><div class="pg"><div class="run">What you will learn</div><div class="body"><div class="chnum">Chapter the Fourth</div><h2 class="ch">What you will learn</h2>
+<p class="dc">The course is built around 10 units of the coursebook, spread across the three terms. Choose a term to see what you will be able to do by the end of it.</p>
+<div class="ttabs" role="tablist"><button class="ttab" data-term="0" aria-selected="true" role="tab"><b>I</b><span>First term</span></button><button class="ttab" data-term="1" aria-selected="false" role="tab"><b>II</b><span>Second term</span></button><button class="ttab" data-term="2" aria-selected="false" role="tab"><b>III</b><span>Third term</span></button></div><div class="tpanels"><div class="tpanel on" data-panel="0" data-start="2026-09-22" data-end="2026-12-17" role="tabpanel">
+<div class="tp-dates">22 September – 17 December</div><div class="tp-units">Units 1–4</div>
+<p class="tp-can"><span class="tp-lab">By the end of the term you will be able to</span> speak at length and without hesitation on personal and professional topics, develop a description or an account in detail, and discuss culture and the media with precision, adapting your register to the situation.</p><div class="tp-now">This is the term we are in now</div></div><div class="tpanel" data-panel="1" data-start="2027-01-12" data-end="2027-03-18" role="tabpanel">
+<div class="tp-dates">12 January – 18 March</div><div class="tp-units">Units 5–7</div>
+<p class="tp-can"><span class="tp-lab">By the end of the term you will be able to</span> put forward and defend a proposal, argue a balanced case that acknowledges the opposing view, and discuss social and cultural questions — law, art, the way we live — along a clear line of reasoning.</p><div class="tp-now">This is the term we are in now</div></div><div class="tpanel" data-panel="2" data-start="2027-03-30" data-end="2027-05-25" role="tabpanel">
+<div class="tp-dates">30 March – 25 May</div><div class="tp-units">Units 8–10</div>
+<p class="tp-can"><span class="tp-lab">By the end of the term you will be able to</span> take and sustain a position on contested issues, explain and justify a point of view in detail, and handle formal exchanges where you need to make a case or a complaint effectively.</p><div class="tp-now">This is the term we are in now</div></div></div></div><div class="folio">7</div></div></div><div class="shade"></div></div><div class="face back" data-face="9" data-title="Assessment"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Fifth</div><h2 class="ch">Assessment</h2>
+<p class="dc">To pass level B2.2 you must sit the official certification exam at the end of the year and obtain an average mark of at least 65/100, with a mark of at least 50/100 in each skill: listening, speaking, reading, writing and mediation.</p>
+<div class="dials"><figure class="dial"><svg viewBox="0 0 100 58" aria-hidden="true">
+<path class="arc" d="M6,50 A44,44 0 0 1 94,50"/><path class="arcfill" pathLength="100" style="--v:65" d="M6,50 A44,44 0 0 1 94,50"/>
+<g class="ticks"><line x1="6.0" y1="50.0" x2="10.0" y2="50.0"/><line x1="8.2" y1="36.4" x2="12.0" y2="37.6"/><line x1="14.4" y1="24.1" x2="17.6" y2="26.5"/><line x1="24.1" y1="14.4" x2="26.5" y2="17.6"/><line x1="36.4" y1="8.2" x2="37.6" y2="12.0"/><line x1="50.0" y1="6.0" x2="50.0" y2="10.0"/><line x1="63.6" y1="8.2" x2="62.4" y2="12.0"/><line x1="75.9" y1="14.4" x2="73.5" y2="17.6"/><line x1="85.6" y1="24.1" x2="82.4" y2="26.5"/><line x1="91.8" y1="36.4" x2="88.0" y2="37.6"/><line x1="94.0" y1="50.0" x2="90.0" y2="50.0"/></g><line class="needle" style="--r:27.0deg" x1="50" y1="50" x2="50" y2="12"/><circle cx="50" cy="50" r="3.2" class="hub"/></svg>
+<figcaption><b>65</b><span>/100</span><small>your average mark</small></figcaption></figure><figure class="dial"><svg viewBox="0 0 100 58" aria-hidden="true">
+<path class="arc" d="M6,50 A44,44 0 0 1 94,50"/><path class="arcfill" pathLength="100" style="--v:50" d="M6,50 A44,44 0 0 1 94,50"/>
+<g class="ticks"><line x1="6.0" y1="50.0" x2="10.0" y2="50.0"/><line x1="8.2" y1="36.4" x2="12.0" y2="37.6"/><line x1="14.4" y1="24.1" x2="17.6" y2="26.5"/><line x1="24.1" y1="14.4" x2="26.5" y2="17.6"/><line x1="36.4" y1="8.2" x2="37.6" y2="12.0"/><line x1="50.0" y1="6.0" x2="50.0" y2="10.0"/><line x1="63.6" y1="8.2" x2="62.4" y2="12.0"/><line x1="75.9" y1="14.4" x2="73.5" y2="17.6"/><line x1="85.6" y1="24.1" x2="82.4" y2="26.5"/><line x1="91.8" y1="36.4" x2="88.0" y2="37.6"/><line x1="94.0" y1="50.0" x2="90.0" y2="50.0"/></g><line class="needle" style="--r:0.0deg" x1="50" y1="50" x2="50" y2="12"/><circle cx="50" cy="50" r="3.2" class="hub"/></svg>
+<figcaption><b>50</b><span>/100</span><small>your mark in each skill</small></figcaption></figure></div>
+<div class="certif"><div class="wax" aria-hidden="true"><span>B2</span></div><p>Passing the certification exam entitles you to the official B2 certificate. Note that passing the official certification exam is the only way to pass the year at this level.</p></div></div><div class="folio">8</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="5"><div class="face front" data-face="10" data-title="Assessment"><div class="paper r"><div class="pg"><div class="run">Assessment</div><div class="body"><div class="chnum">Chapter the Fifth, continued</div><h2 class="ch">Assessment for learning</h2><p class="dc">The following tests and assignments take place during the year so that you and your teacher can both see the progress you are making:</p><ul class="skills"><li><b>Listening</b><span>1 listening test</span></li><li><b>Speaking</b><span>2 oral activities (conversations, presentations, recordings, etc.)</span></li><li><b>Reading</b><span>a reading dossier — Reading Passport and Reading Log (a course requirement, not a graded test)</span></li><li><b>Writing</b><span>3 compositions (one of which is a written mediation)</span></li><li><b>Mediation</b><span>1 oral mediation exercise and 1 written mediation assignment</span></li></ul><div class="fleuron">❦</div></div><div class="folio">9</div></div></div><div class="shade"></div></div><div class="face back" data-face="11" data-title="Assessment"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Fifth, continued</div><h2 class="ch">The structure of the exam</h2>
+<div class="ledger" role="group" aria-label="Parts of the exam"><div class="lg-sec">Written exam</div><button class="lg-row" data-row="0" aria-pressed="true"><span class="lg-n">Reading comprehension</span><span class="lg-d">50 min</span><span class="lg-m">20</span></button><button class="lg-row" data-row="1" aria-pressed="false"><span class="lg-n">Listening comprehension</span><span class="lg-d">40 min</span><span class="lg-m">20</span></button><button class="lg-row" data-row="2" aria-pressed="false"><span class="lg-n">Written mediation</span><span class="lg-d">40 min</span><span class="lg-m">10</span></button><button class="lg-row" data-row="3" aria-pressed="false"><span class="lg-n">Written expression and interaction</span><span class="lg-d">90 min</span><span class="lg-m">20</span></button><div class="lg-sec">Oral exam</div><button class="lg-row" data-row="4" aria-pressed="false"><span class="lg-n">Oral expression and interaction</span><span class="lg-d">20 min</span><span class="lg-m">20</span></button><button class="lg-row" data-row="5" aria-pressed="false"><span class="lg-n">Oral mediation</span><span class="lg-d">15 min</span><span class="lg-m">10</span></button>
+<div class="lg-total"><span class="lg-n">Total</span><span class="lg-d"></span><span class="lg-m">100</span></div></div>
+<div class="marksbar" aria-hidden="true"><i class="seg w" style="width:20%" data-seg="0"></i><i class="seg w" style="width:20%" data-seg="1"></i><i class="seg w" style="width:10%" data-seg="2"></i><i class="seg w" style="width:20%" data-seg="3"></i><i class="seg o" style="width:20%" data-seg="4"></i><i class="seg o" style="width:10%" data-seg="5"></i><span class="pass" style="left:65%"><em>pass mark 65</em></span></div>
+<div class="lg-detail" aria-live="polite"><p class="lg-what on" data-what="0"><span class="tp-lab">What you do</span> Answer 25–30 multiple-choice, true/false and matching questions and/or insert fragments in at least three texts of different lengths and types (about 2,000–2,200 words in total).</p><p class="lg-what" data-what="1"><span class="tp-lab">What you do</span> Answer 25–30 multiple-choice and true/false questions on at least three video documents of different lengths and types.</p><p class="lg-what" data-what="2"><span class="tp-lab">What you do</span> Write a text of about 150 words to convey specific information to the intended recipient.</p><p class="lg-what" data-what="3"><span class="tp-lab">What you do</span> Task 1. Write an interactional text (letter or email) in an appropriate formal register. Task 2. Write a text of a different type (narrative, argumentative, etc.), about 175 words.</p><p class="lg-what" data-what="4"><span class="tp-lab">What you do</span> Task 1. Relate a past experience on a given topic. Task 2. Discuss and exchange reasoned opinions on the same topic as in Task 1.</p><p class="lg-what" data-what="5"><span class="tp-lab">What you do</span> Summarise and explain a text of 250–300 words to the other group members.</p></div></div><div class="folio">10</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="6"><div class="face front" data-face="12" data-title="Assessment"><div class="paper r"><div class="pg"><div class="run">Assessment</div><div class="body"><div class="chnum">Chapter the Fifth, continued</div><h2 class="ch">Level B2, part by part</h2><div class="parts"><div class="part"><div class="part-h"><b>Part 1</b><span>Reading 50′ + Listening 40′ + Written mediation 40′</span></div><div class="part-bar"><i style="--w:100.0%"></i><em>130 min</em></div></div><div class="part"><div class="part-h"><b>Part 2</b><span>Writing</span></div><div class="part-bar"><i style="--w:69.2%"></i><em>90 min</em></div></div><div class="part"><div class="part-h"><b>Part 3</b><span>Speaking + Oral mediation <small>(preparation 8′ — production 1′ — interaction 15′)</small></span></div><div class="part-bar"><i style="--w:23.1%"></i><em>30 min</em></div></div></div><h3 class="sub">What continuous assessment is for</h3><p>Continuous assessment at this level exists to make you aware of your progress and to train you for the official certification exam at the end of the year. It does not replace it.</p></div><div class="folio">11</div></div></div><div class="shade"></div></div><div class="face back" data-face="13" data-title="Important dates"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Sixth</div><h2 class="ch">Important dates</h2><ol class="timeline"><li class="dt" data-date="2026-11-10"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">First class writing</div><div class="dt-when">Tuesday 10 November 2026 <span class="dt-count"></span></div></div></li><li class="dt" data-date="2026-12-17"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Second class writing</div><div class="dt-when">Thursday 17 December 2026 <span class="dt-count"></span></div></div></li><li class="dt" data-date="2027-01-19"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Synthesis session and Reading Passport hand-in</div><div class="dt-when">Tuesday 19 January 2027 <span class="dt-count"></span></div></div></li><li class="dt" data-date="2027-02-09"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Listening test</div><div class="dt-when">Tuesday 9 February 2027 <span class="dt-count"></span></div></div></li><li class="dt" data-date="2027-02-23"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Third class writing (written mediation)</div><div class="dt-when">Tuesday 23 February 2027 <span class="dt-count"></span></div></div></li><li class="dt" data-date="2027-03-09"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Mock exam</div><div class="dt-when">9, 11, 16 and 18 March 2027 <em>(oral exams may take more days)</em> <span class="dt-count"></span></div></div></li><li class="dt" data-date="2027-05-04"><span class="dt-dot"></span><div class="dt-b"><div class="dt-what">Reading Log hand-in</div><div class="dt-when">Tuesday 4 May 2027 <span class="dt-count"></span></div></div></li></ol>
+<div class="finalexam"><span class="tp-lab">Final exam</span> Set by the Departament d'Educació — to be announced</div>
+<p class="aside tight">Add these dates to your calendar so you are not caught off guard. The assignments and exams above take place on these dates only and are not repeated, save in cases of force majeure.</p></div><div class="folio">12</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="7"><div class="face front" data-face="14" data-title="Moodle and the Oxford English Hub"><div class="paper r"><div class="pg"><div class="run">Moodle and the Oxford English Hub</div><div class="body"><div class="chnum">Chapter the Seventh</div><h2 class="ch">Moodle</h2>
+<p class="dc">Moodle is the virtual learning environment we use at EOI Salou. You need to create your own profile on it.</p>
+<ol class="steps"><li><b>Go to</b> <a href="https://agora-eoi.xtec.cat/eoisalou/moodle/" target="_blank" rel="noopener">agora-eoi.xtec.cat/eoisalou/moodle</a>.</li>
+<li>Click <b>“Inicia la sessió”</b> in the top right-hand corner and then <b>“Crea un compte d'usuari nou”</b>.</li><li><b>Find your group</b>: in your case <span class="mono">English B2.2 - 16B</span>.</li><li><b>Enter the enrolment key</b> to join the course. Tap the seal to copy it.<button class="keyseal" data-key="b222627*" data-noturn><span class="ks-wax"><span>EOI</span></span><span class="ks-key">b222627*</span><span class="ks-done">copied</span></button></li></ol></div><div class="folio">13</div></div></div><div class="shade"></div></div><div class="face back" data-face="15" data-title="Moodle and the Oxford English Hub"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Seventh, continued</div><h2 class="ch">Your profile, and the Hub</h2>
+<p>Then set your privacy preferences, to show or hide what you want the other participants to see:</p>
+<ol class="steps small"><li>Open the dropdown menu with the ▼ next to your name, top right;</li><li>Click “Preferències”;</li><li>Go to “Compte d'usuari”;</li><li>Edit your privacy settings.</li></ol>
+<p class="photo-note"><span class="frame" aria-hidden="true"><svg viewBox="0 0 40 48"><circle cx="20" cy="17" r="8"/><path d="M6,44 Q20,24 34,44"/></svg></span>Please upload a headshot photo so that your teacher knows who you are.</p>
+<div class="hub"><p>Your coursebook comes with online access to the <a href="https://englishhub.oup.com/" target="_blank" rel="noopener">Oxford English Hub</a>, where you can find the materials that go with the book.</p>
+<p>Your course also includes <b>Exam Confidence</b>, an online exam-preparation strand that trains you on the certification task types.</p></div></div><div class="folio">14</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="8"><div class="face front" data-face="16" data-title="Tutorials and support"><div class="paper r"><div class="pg"><div class="run">Tutorials and support</div><div class="body"><div class="chnum">Chapter the Eighth</div><h2 class="ch">Tutorials and support</h2>
+<p class="dc">You can ask for an individual tutorial with your teacher at any point in the year, to talk about the difficulties you are having, how to achieve better results, and any other questions you may have about the course or about your own learning.</p>
+<div class="twoways"><div><h3>A quick question</h3><p>Speak to your teacher before or after class.</p></div><div><h3>A proper conversation</h3><p>Arrange a tutorial by agreeing a time with your teacher.</p></div></div>
+<div class="fleuron">❦</div></div><div class="folio">15</div></div></div><div class="shade"></div></div><div class="face back" data-face="17" data-title="Tutorials and support"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Eighth, continued</div><h2 class="ch">Your marks and your own work</h2>
+<p class="dc">Marks for the assignments and tests are returned to you through Moodle, together with the teacher's comments. Bear in mind that reading the feedback and understanding it is an important part of your learning too.</p>
+<p>Work you hand in must be your own. It is fine to use a dictionary, a grammar checker or a translation tool to help you write a better text.</p>
+<blockquote class="caution">However, avoid handing in an assignment that contains sentences and ideas generated by an AI as your own.</blockquote></div><div class="folio">16</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="9"><div class="face front" data-face="18" data-title="Keep reading"><div class="paper r"><div class="pg"><div class="run">Keep reading</div><div class="body"><div class="chnum">Chapter the Ninth</div><h2 class="ch">Keep reading</h2>
+<p class="dc">To use <a href="https://biblioteca.ebiblio.cat/?locale=ca" target="_blank" rel="noopener">eBiblio</a>, the public library's lending app, you need a public library card, so do go and get one if you have not already. There are over 600 titles in English and many more in other languages.</p>
+<figure class="stack" aria-hidden="true"><i class="bk b1"></i><i class="bk b2"></i><i class="bk b3"></i><i class="bk b4"></i><i class="bk b5"></i></figure>
+<p>You can also borrow the set readers and any other books you fancy from our classroom library.</p>
+<a class="btn-link" href="https://docs.google.com/spreadsheets/d/1jhyYBZPGXRo4idTQRuficbvYb4co-BFi/edit?usp=sharing&amp;ouid=101240796128574571728&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">Browse the classroom library catalogue</a></div><div class="folio">17</div></div></div><div class="shade"></div></div><div class="face back" data-face="19" data-title="Bibliographical note"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="chnum">Chapter the Tenth</div><h2 class="ch">Bibliographical note</h2>
+<p class="dc">This course follows the official curriculum for the Escoles Oficials d'Idiomes in Catalonia. The full legal framework is:</p>
+<ul class="biblio">
+<li><a href="https://xtec.gencat.cat/ca/curriculum/idiomes-a-les-eoi/curriculum/" target="_blank" rel="noopener">Currículum Catalunya</a></li>
+<li><a href="https://portaldogc.gencat.cat/utilsEADOP/PDF/8777/1932977.pdf" target="_blank" rel="noopener">Decret 243/2022, de 18 d'octubre</a> <span>A2, C1 i C2</span></li>
+<li><a href="https://dogc.gencat.cat/ca/document-del-dogc/?documentId=923138" target="_blank" rel="noopener">Decret 45/2022, de 15 de març</a> <span>B1 i B2</span></li>
+<li><a href="https://www.boe.es/boe/dias/2019/01/12/pdfs/BOE-A-2019-317.pdf" target="_blank" rel="noopener">Reial Decret 1/2019, d'11 de gener</a> <span>Basic principles for assessing the intermediate and advanced levels.</span></li>
+<li><a href="https://www.boe.es/boe/dias/2017/12/23/pdfs/BOE-A-2017-15367.pdf" target="_blank" rel="noopener">Reial Decret 1041/2017, de 22 de desembre</a> <span>B1 descriptors on p. 9, B2 descriptors on p. 22, C1 descriptors on p. 37 of the pdf.</span></li></ul>
+<p class="aside tight">If you need any further information, visit <a href="https://agora-eoi.xtec.cat/eoisalou/" target="_blank" rel="noopener">our website</a> or ask your teacher. Follow us on <a href="https://www.instagram.com/eoi_salou" target="_blank" rel="noopener">Instagram</a>.</p></div><div class="folio">18</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="10"><div class="face front" data-face="20" data-title=""><div class="paper r"><div class="pg"><div class="run blank">&nbsp;</div><div class="body"><div class="epigraph"><div class="fleuron big">❧</div><p>Lock up your libraries if you like; but there is no gate, no lock, no bolt that you can set upon the freedom of my mind.</p><cite>Virginia Woolf, <i>A Room of One's Own</i></cite></div></div><div class="folio">19</div></div></div><div class="shade"></div></div><div class="face back" data-face="21" data-title="Colophon"><div class="paper l"><div class="pg"><div class="run">English B2.2 · B2.2-16B</div><div class="body"><div class="colophon"><div class="finis">Finis</div><p class="hope">We hope you enjoy the course!</p><div class="rule-orn"><span></span>✦<span></span></div>
+<p class="colo-small">Escola Oficial d'Idiomes de Salou<br>School year 2026–2027</p><p class="credit">Class of Coffee – with AI assistance</p></div></div><div class="folio">20</div></div></div><div class="shade"></div></div></div>
+<div class="leaf" data-k="11"><div class="face front" data-face="22" data-title="Endpapers"><div class="endpaper"><svg class="marble" viewBox="0 0 400 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><filter id="mb2" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.018" numOctaves="3" seed="17"/><feDisplacementMap in="SourceGraphic" scale="140"/></filter>
+<pattern id="st2" width="400" height="46" patternUnits="userSpaceOnUse"><rect width="400" height="46" class="m1"/><rect y="12" width="400" height="9" class="m2"/><rect y="25" width="400" height="4" class="m3"/><rect y="33" width="400" height="7" class="m4"/></pattern></defs>
+<g filter="url(#mb2)"><rect x="-80" y="-80" width="560" height="720" fill="url(#st2)" transform="rotate(-18 200 280)"/></g></svg></div><div class="shade"></div></div><div class="face back" data-face="23" data-title="Back cover"><div class="leather backcov"><div class="gilt-frame"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div><div class="bc-orn">❧</div></div><div class="shade"></div></div></div>
+      <div class="castR" id="castR"></div><div class="castL" id="castL"></div>
+    </div>
+  </div>
+</main>
+<nav class="bar" aria-label="Book controls">
+  <button class="arrow" id="prev" aria-label="Previous page">‹</button>
+  <button id="toContents">Contents</button>
+  <div class="where" id="where" aria-live="polite"></div>
+  <button class="fs" id="fs" aria-label="Full screen">⤢</button>
+  <button class="arrow" id="next" aria-label="Next page">›</button>
+</nav>
+<div class="keyhint" id="keyhint">← → to turn · F for full screen</div>
+
+<script>
+(function(){
+  const body = document.body, book = document.getElementById('book'), clip = document.getElementById('clip');
+  const leaves = [...document.querySelectorAll('.leaf')];
+  const N = leaves.length, F = N * 2;
+  const faces = [...document.querySelectorAll('.face')].sort((a,b)=>a.dataset.face-b.dataset.face);
+  const castR = document.getElementById('castR'), castL = document.getElementById('castL');
+  const block = document.getElementById('block'), edgeL = document.getElementById('edgeL'), edgeR = document.getElementById('edgeR');
+  const ribbon = document.getElementById('ribbon');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = { get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } }, set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} } };
+
+  let t = 0, side = 'R', single = false, pw = 480, ph = 680, busy = false;
+  const angles = new Array(N).fill(0);
+
+  /* ---------- sizing ---------- */
+  function layout(){
+    const vw = innerWidth, vh = innerHeight, barH = vw < 600 ? 60 : 68;
+    document.documentElement.style.setProperty('--bar', barH + 'px');
+    const availH = vh - barH - 54, availW = vw - 56;
+    let h = Math.min(availH, availW / 2 / 0.71), w = h * 0.71;
+    single = w < 300;
+    if(single){
+      w = Math.min(vw - 20, 560); h = Math.min(vh - barH - 16, w * 1.75);
+      if(h < w * 1.3){ w = h / 1.3 }
+    }
+    pw = Math.floor(w); ph = Math.floor(h);
+    const fs = Math.min(ph / 39.5, pw / 25.5);
+    const r = document.documentElement.style;
+    r.setProperty('--pw', pw + 'px'); r.setProperty('--ph', ph + 'px'); r.setProperty('--fs', fs.toFixed(2) + 'px');
+    body.classList.toggle('single', single);
+    body.classList.add('noanim'); applyStatic(); void book.offsetWidth; body.classList.remove('noanim');
+  }
+
+  /* ---------- static state ---------- */
+  function leafTransform(k, a){
+    const p = -a / 180, s = Math.sin(p * Math.PI);
+    return `rotateY(${a}deg) translateZ(${(s * pw * .02).toFixed(1)}px) skewY(${(-s * .8).toFixed(2)}deg)`;
+  }
+  function setLeaf(k, a, moving){
+    angles[k] = a;
+    const leaf = leaves[k], p = -a / 180, s = Math.sin(p * Math.PI);
+    leaf.style.transform = leafTransform(k, a);
+    const [fr, bk] = leaf.querySelectorAll(':scope > .face > .shade');
+    fr.style.opacity = p < .5 ? (s * .9).toFixed(3) : 0;
+    bk.style.opacity = p >= .5 ? (s * .75).toFixed(3) : 0;
+    if(moving){
+      castR.style.opacity = p < .5 ? (s * .8).toFixed(3) : 0;
+      castL.style.opacity = p >= .5 ? (s * .8).toFixed(3) : 0;
+      castR.style.transform = `scaleX(${(1 - p * 2).toFixed(3)})`; castR.style.transformOrigin = 'left';
+      castL.style.transform = `scaleX(${(p * 2 - 1).toFixed(3)})`; castL.style.transformOrigin = 'right';
+    }
+  }
+  function applyStatic(){
+    leaves.forEach((leaf, k) => {
+      const turned = k < t;
+      setLeaf(k, turned ? -180 : 0);
+      leaf.style.zIndex = turned ? (k + 1) : (N - k);
+      leaf.classList.toggle('far', turned ? k < t - 2 : k > t + 1);
+    });
+    castR.style.opacity = castL.style.opacity = 0;
+    position();
+    markVisible();
+  }
+  function position(){
+    let x = 0;
+    if(single){ x = side === 'R' ? -pw : 0; }
+    else { x = t === 0 ? -pw / 2 : (t === N ? pw / 2 : 0); }
+    book.style.transform = `translateX(${x}px)`;
+    // page block beneath
+    const stackL = t === 0 ? 0 : Math.min(pw * .025, 2 + t * .9), stackR = t === N ? 0 : Math.min(pw * .025, 2 + (N - t) * .9);
+    let left, width;
+    if(single){ left = (side === 'R' ? -pw : 0); width = pw * 2; }
+    else { left = x + (t === 0 ? pw : 0); width = (t === 0 || t === N) ? pw : pw * 2; }
+    block.style.left = (left - stackL) + 'px'; block.style.width = (width + stackL + stackR) + 'px';
+    edgeL.style.left = 0; edgeL.style.width = stackL + 'px';
+    edgeR.style.right = 0; edgeR.style.width = stackR + 'px';
+    edgeL.style.display = t === 0 ? 'none' : ''; edgeR.style.display = t === N ? 'none' : '';
+    ribbon.style.left = (x + pw * 1.03) + 'px';
+    ribbon.style.opacity = (single || t === N) ? 0 : 1;
+  }
+  function visibleFaces(){
+    if(single){ return [side === 'R' ? 2 * t : 2 * t - 1]; }
+    const v = []; if(t > 0) v.push(2 * t - 1); if(t < N) v.push(2 * t); return v;
+  }
+  function markVisible(){
+    const vis = visibleFaces();
+    faces.forEach((f, i) => {
+      const on = vis.includes(i);
+      if(on){ f.removeAttribute('inert'); f.removeAttribute('aria-hidden'); }
+      else { f.setAttribute('inert', ''); f.setAttribute('aria-hidden', 'true'); }
+      if(!on && f.classList.contains('live')){ f.classList.remove('live'); f.classList.add('pre'); }
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => vis.forEach(i => { faces[i].classList.remove('pre'); faces[i].classList.add('live'); })));
+    updateBar();
+  }
+
+  /* ---------- turning ---------- */
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  function animateLeaf(k, from, to, dur){
+    return new Promise(res => {
+      const leaf = leaves[k]; leaf.style.zIndex = 2 * N + 5; castR.style.zIndex = castL.style.zIndex = 2 * N + 4; leaf.classList.remove('far');
+      if(k + 1 < N) leaves[k + 1].classList.remove('far'); if(k - 1 >= 0) leaves[k - 1].classList.remove('far');
+      if(reduce || dur <= 1){ setLeaf(k, to); return res(); }
+      const t0 = performance.now();
+      function step(now){
+        const x = Math.min(1, (now - t0) / dur);
+        setLeaf(k, from + (to - from) * ease(x), true);
+        if(x < 1) requestAnimationFrame(step); else res();
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  async function goFace(f){
+    f = Math.max(0, Math.min(F - 1, f));
+    const targetT = Math.ceil(f / 2), targetSide = f % 2 === 0 ? 'R' : 'L';
+    if(busy) return; busy = true; dismissHint();
+    const dist = Math.abs(targetT - t), dur = dist > 1 ? Math.max(160, 520 / dist) : 1000;
+    if(targetT !== t){ prePosition(targetT, targetSide); }
+    while(t < targetT){ const k = t; await animateLeaf(k, angles[k], -180, dur); t++; }
+    while(t > targetT){ const k = t - 1; await animateLeaf(k, angles[k], 0, dur); t--; }
+    side = targetSide;
+    applyStatic();
+    busy = false;
+  }
+  function prePosition(tt, sd){ // start the book slide while the leaf turns
+    const keepT = t, keepS = side; t = tt; side = sd; position(); t = keepT; side = keepS;
+  }
+  function currentFace(){ return single ? (side === 'R' ? 2 * t : 2 * t - 1) : (t === 0 ? 0 : 2 * t - 1); }
+  function next(){
+    if(single){ const f = currentFace(); if(f >= F - 1) return; if(f % 2 === 1 || f === 0){ if(f === 0) return goFace(1); slide(f + 1); } else goFace(f + 1); }
+    else if(t < N) goFace(2 * t + 1 + (t === N - 1 ? 0 : 0));
+  }
+  function prev(){
+    if(single){ const f = currentFace(); if(f % 2 === 0 && f > 0){ slide(f - 1); } else goFace(f - 1); }
+    else if(t > 0) goFace(2 * (t - 1));
+  }
+  function slide(f){ // single mode: move between the two sides of an open spread
+    if(busy) return; dismissHint();
+    t = Math.ceil(f / 2); side = f % 2 === 0 ? 'R' : 'L'; position(); markVisible();
+  }
+  // spread mode: goFace(2t+1) lands on t+1; goFace(2(t-1)) lands on t-1
+  window.addEventListener('keydown', e => {
+    if(e.target.closest && e.target.closest('input,textarea')) return;
+    if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); next(); }
+    else if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+    else if(e.key === 'Home'){ goFace(0); }
+    else if(e.key === 'End'){ goFace(F - 1); }
+    else if(e.key === 'f' || e.key === 'F'){ toggleFS(); }
+    else if(e.key === 'c' || e.key === 'C'){ goContents(); }
+  });
+
+  /* ---------- drag & click ---------- */
+  let drag = null;
+  const interactive = el => el.closest('a,button,input,textarea,select,label,[data-noturn]');
+  book.addEventListener('pointerdown', e => {
+    if(busy || interactive(e.target) || e.button > 0) return;
+    const rect = clip.getBoundingClientRect();
+    drag = { x: e.clientX, y: e.clientY, id: e.pointerId, moved: false, rect, k: null, dir: 0 };
+  });
+  window.addEventListener('pointermove', e => {
+    if(!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x;
+    if(!drag.moved){
+      if(Math.abs(dx) < 8) return;
+      drag.moved = true;
+      const fwd = dx < 0;
+      if(single){
+        const f = currentFace();
+        if(fwd && side === 'R' && t < N && f !== F - 1){ drag.k = t; drag.dir = -1; }
+        else if(!fwd && side === 'L' && t > 0){ drag.k = t - 1; drag.dir = 1; }
+      } else {
+        if(fwd && t < N){ drag.k = t; drag.dir = -1; }
+        else if(!fwd && t > 0){ drag.k = t - 1; drag.dir = 1; }
+      }
+      if(drag.k !== null){ leaves[drag.k].style.zIndex = 2 * N + 5; leaves[drag.k].classList.remove('far'); [drag.k-1, drag.k+1].forEach(j => leaves[j] && leaves[j].classList.remove('far')); dismissHint(); }
+    }
+    if(drag.k === null) return;
+    const span = pw * 1.4;
+    let p = Math.max(0, Math.min(1, Math.abs(dx) / span));
+    if((drag.dir === -1 && dx > 0) || (drag.dir === 1 && dx < 0)) p = 0;
+    const a = drag.dir === -1 ? -180 * p : -180 * (1 - p);
+    setLeaf(drag.k, a, true); drag.p = p;
+  });
+  window.addEventListener('pointerup', async e => {
+    if(!drag || e.pointerId !== drag.id) return;
+    const d = drag; drag = null;
+    const dx = e.clientX - d.x;
+    if(!d.moved){ // click
+      const x = e.clientX - d.rect.left, w = d.rect.width;
+      if(single){ if(x > w * .35) next(); else prev(); }
+      else {
+        const bx = e.clientX - book.getBoundingClientRect().left;
+        if(bx > pw) next(); else prev();
+      }
+      return;
+    }
+    if(single && d.k === null){ if(dx < -40) next(); else if(dx > 40) prev(); return; }
+    if(d.k === null) return;
+    busy = true;
+    const done = (d.p || 0) > .28;
+    const k = d.k, dur = 480;
+    if(d.dir === -1){
+      if(done){ await animateLeaf(k, angles[k], -180, dur); t = k + 1; side = 'L'; }
+      else { await animateLeaf(k, angles[k], 0, dur * .7); }
+    } else {
+      if(done){ await animateLeaf(k, angles[k], 0, dur); t = k; side = 'R'; }
+      else { await animateLeaf(k, angles[k], -180, dur * .7); }
+    }
+    busy = false; applyStatic();
+  });
+
+  /* ---------- bar ---------- */
+  const where = document.getElementById('where'), prevB = document.getElementById('prev'), nextB = document.getElementById('next');
+  function updateBar(){
+    const vis = visibleFaces();
+    const content = vis.map(i => faces[i]).filter(f => f.querySelector('.paper'));
+    let title = '', folio = '';
+    if(t === 0) title = 'Tap the cover to open';
+    else if(t === N) title = 'Back cover';
+    else if(!content.length) title = 'Endpapers';
+    else {
+      const titles = [...new Set(content.map(f => f.dataset.title).filter(Boolean))];
+      title = titles.join(' · ') || 'Colophon';
+      const nums = content.map(f => f.querySelector('.folio').textContent);
+      folio = nums.length > 1 ? `pages ${nums[0]}–${nums[1]}` : `page ${nums[0]}`;
+    }
+    where.innerHTML = title + (folio ? `<small>${folio}</small>` : '');
+    const f = currentFace();
+    prevB.disabled = single ? f === 0 : t === 0;
+    nextB.disabled = single ? f === F - 1 : t === N;
+  }
+  prevB.onclick = prev; nextB.onclick = next;
+  const contentsFace = faces.findIndex(f => f.dataset.title === 'Contents');
+  function goContents(){ goFace(contentsFace); }
+  window.__go = goFace;
+  document.getElementById('toContents').onclick = goContents;
+  function toggleFS(){
+    try{
+      if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }catch(e){}
+  }
+  document.getElementById('fs').onclick = toggleFS;
+  const keyhint = document.getElementById('keyhint');
+  let hintT = setTimeout(dismissHint, 9000);
+  function dismissHint(){ keyhint.classList.add('gone'); }
+
+  /* ---------- page interactions ---------- */
+  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => goFace(+b.dataset.go)));
+
+  const nameKey = 'infobook-' + clip.dataset.group + '-name', nameIn = document.getElementById('bpname');
+  if(nameIn){
+    nameIn.value = store.get(nameKey) || '';
+    nameIn.addEventListener('input', () => store.set(nameKey, nameIn.value));
+    nameIn.addEventListener('keydown', e => e.stopPropagation());
+  }
+
+  document.querySelectorAll('.spine').forEach(sp => sp.addEventListener('click', () => {
+    const i = sp.dataset.ref;
+    document.querySelectorAll('.spine').forEach(s => s.setAttribute('aria-pressed', s === sp));
+    document.querySelectorAll('.refcite').forEach(c => c.classList.toggle('on', c.dataset.cite === i));
+  }));
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const parse = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+  const tabs = [...document.querySelectorAll('.ttab')], panels = [...document.querySelectorAll('.tpanel')];
+  function showTerm(i){
+    tabs.forEach((b, j) => b.setAttribute('aria-selected', j === i));
+    panels.forEach((p, j) => p.classList.toggle('on', j === i));
+  }
+  tabs.forEach((b, i) => b.addEventListener('click', () => showTerm(i)));
+  let termNow = panels.findIndex(p => today >= parse(p.dataset.start) && today <= parse(p.dataset.end));
+  if(termNow >= 0) panels[termNow].classList.add('now');
+  let termDefault = panels.findIndex(p => today <= parse(p.dataset.end));
+  showTerm(termDefault < 0 ? 2 : termDefault);
+
+  const rowsB = [...document.querySelectorAll('.lg-row')];
+  rowsB.forEach(r => {
+    const act = () => {
+      rowsB.forEach(x => x.setAttribute('aria-pressed', x === r));
+      document.querySelectorAll('.lg-what').forEach(w => w.classList.toggle('on', w.dataset.what === r.dataset.row));
+      document.querySelectorAll('.seg').forEach(s => s.classList.toggle('hi', s.dataset.seg === r.dataset.row));
+    };
+    r.addEventListener('click', act); r.addEventListener('mouseenter', act); r.addEventListener('focus', act);
+  });
+
+  let nextFound = false;
+  document.querySelectorAll('.dt').forEach(li => {
+    const d = parse(li.dataset.date), days = Math.round((d - today) / 864e5), c = li.querySelector('.dt-count');
+    let txt;
+    if(days < 0) { txt = 'done'; li.classList.add('past'); }
+    else if(days === 0) txt = 'today';
+    else if(days === 1) txt = 'tomorrow';
+    else if(days < 14) txt = `in ${days} days`;
+    else if(days < 70) txt = `in ${Math.round(days / 7)} weeks`;
+    else txt = `in ${Math.round(days / 30.4)} months`;
+    c.textContent = txt;
+    if(days >= 0 && !nextFound){ li.classList.add('next'); nextFound = true; }
+  });
+
+  document.querySelectorAll('.keyseal').forEach(ks => ks.addEventListener('click', () => {
+    const key = ks.dataset.key;
+    const ok = () => { ks.classList.remove('copied'); void ks.offsetWidth; ks.classList.add('copied'); };
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = key; ta.style.position = 'fixed'; ta.style.opacity = 0; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} ta.remove(); ok(); };
+    try{ navigator.clipboard.writeText(key).then(ok, fallback); }catch(e){ fallback(); }
+  }));
+
+  faces.forEach(f => f.classList.add('pre'));
+
+  /* ---------- dust in the candlelight ---------- */
+  const cv = document.getElementById('dust'), cx = cv.getContext('2d');
+  let motes = [];
+  function sizeDust(){
+    cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio;
+    motes = Array.from({length: Math.round(Math.min(70, innerWidth / 22))}, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.6 + .4, vx: (Math.random() - .5) * .00012, vy: -Math.random() * .00018 - .00004, ph: Math.random() * 6.28 }));
+  }
+  function dust(now){
+    cx.clearRect(0, 0, cv.width, cv.height);
+    for(const m of motes){
+      m.x += m.vx + Math.sin(now / 3000 + m.ph) * .00008; m.y += m.vy;
+      if(m.y < -.02){ m.y = 1.02; m.x = Math.random(); }
+      const glow = Math.max(0, 1 - Math.hypot(m.x - .2, m.y - .15) * 1.3);
+      cx.fillStyle = `rgba(255,214,150,${(.12 + glow * .55) * (.6 + .4 * Math.sin(now / 900 + m.ph))})`;
+      cx.beginPath(); cx.arc(m.x * cv.width, m.y * cv.height, m.r * devicePixelRatio, 0, 6.283); cx.fill();
+    }
+    requestAnimationFrame(dust);
+  }
+  if(!reduce){ sizeDust(); requestAnimationFrame(dust); }
+
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { layout(); if(!reduce) sizeDust(); }, 120); });
+  layout();
+  requestAnimationFrame(() => body.classList.add('ready'));
+})();
+</script>
+</body>
+</html>
