@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sentinel · Media Verification · B2.1</title>
+<title>Leo · Media Verification · B2.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -273,7 +273,7 @@
       <g class="pupil-g" id="pupil"><circle class="pupil" cx="23" cy="23" r="6"/><circle class="glint" cx="20.5" cy="20.5" r="1.8"/></g>
     </svg>
     <div class="title">
-      <div class="sys">SENTINEL v4.2 // SCHOOL SECURITY SYSTEM</div>
+      <div class="sys">LEO // SCHOOL AI ASSISTANT</div>
       <h1>Media verification protocol</h1>
     </div>
     <div class="status" role="status"><span class="dot"></span><span id="statusText">Lockdown: media channels sealed</span></div>
@@ -307,7 +307,7 @@
 
 <div class="overlay open" id="taskOverlay" role="dialog" aria-modal="true" aria-labelledby="taskTitle">
   <div class="modal">
-    <div class="sys">SENTINEL // PRIORITY ALERT</div>
+    <div class="sys">LEO // PRIORITY ALERT</div>
     <h2 id="taskTitle">Security notice</h2>
     <p id="taskText"></p>
     <div class="actions"><button class="btn primary" id="taskOk">OK</button></div>
@@ -316,7 +316,7 @@
 
 <div class="overlay" id="winOverlay" role="dialog" aria-modal="true" aria-labelledby="winTitle">
   <div class="modal win">
-    <div class="sys">SENTINEL // STATUS UPDATE</div>
+    <div class="sys">LEO // STATUS UPDATE</div>
     <h2 id="winTitle">Threat level lowered</h2>
     <div class="lines" id="winLines"></div>
     <div class="code-row" id="codeRow"><div class="code-label">New code<br>piece</div><div class="code-digit" id="codeDigit">?</div></div>
@@ -508,7 +508,7 @@ function resetRound() {
   showRound(current); calmEye();
 }
 
-/* Sentinel eye: follows the pointer and calms as pairs are verified */
+/* Leo eye: follows the pointer and calms as pairs are verified */
 const eye = document.querySelector(".eye");
 function lookAt(target) {
   if (reduced()) return;

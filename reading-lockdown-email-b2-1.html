@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>School Mail · Unexpected Lockdown · B2.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e9eef5;
+    --chrome: #f6f8fb;
+    --pane: #ffffff;
+    --line: #dbe2ec;
+    --text: #1c2533;
+    --muted: #677489;
+    --blue: #1a64d6;
+    --blue-tint: #e6effc;
+    --alert: #e11d48;
+    --alert-tint: #fde7ec;
+    --ok: #0f9d6b;
+    --ok-tint: #e3f6ee;
+    --marker: #fde68a;
+    --marker-strong: #facc15;
+    --scrim: rgb(15 23 42 / .5);
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1220; --chrome: #111a2b; --pane: #152036; --line: #26344f;
+      --text: #e4eaf4; --muted: #95a3bb; --blue: #6ea8ff; --blue-tint: #1b2f57;
+      --alert: #fb7185; --alert-tint: #3b1422; --ok: #34d399; --ok-tint: #0f3328;
+      --marker: #5c4a0c; --marker-strong: #a16207; --scrim: rgb(2 6 16 / .7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1220; --chrome: #111a2b; --pane: #152036; --line: #26344f;
+    --text: #e4eaf4; --muted: #95a3bb; --blue: #6ea8ff; --blue-tint: #1b2f57;
+    --alert: #fb7185; --alert-tint: #3b1422; --ok: #34d399; --ok-tint: #0f3328;
+    --marker: #5c4a0c; --marker-strong: #a16207; --scrim: rgb(2 6 16 / .7);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; }
+
+  .app { min-height: 100%; display: flex; flex-direction: column; padding: clamp(6px, 1.4vh, 12px) clamp(8px, 1.6vw, 16px) 4px; gap: 8px; }
+  @media (min-width: 761px) { .app { height: 100%; } }
+
+  .window { flex: 1; min-height: 0; display: flex; flex-direction: column; background: var(--pane); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px -18px rgb(15 23 42 / .45); }
+
+  /* Top bar */
+  .topbar { display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: var(--chrome); border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: .95rem; }
+  .brand svg { color: var(--blue); }
+  .search { flex: 1; max-width: 320px; font-size: .78rem; color: var(--muted); background: var(--pane); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
+  .lock-pill { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; font-weight: 600; color: var(--alert); background: var(--alert-tint); border: 1px solid color-mix(in srgb, var(--alert) 40%, transparent); border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+  .lock-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--alert); animation: pulse 1.6s ease-out infinite; }
+  body.solved .lock-pill { color: var(--ok); background: var(--ok-tint); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
+  body.solved .lock-pill .dot { background: var(--ok); animation: none; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--alert) 55%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
+
+  .main { flex: 1; min-height: 0; display: grid; grid-template-columns: 58px minmax(0, 1fr) minmax(270px, 300px); }
+
+  /* Folder rail */
+  .rail { background: var(--chrome); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 0; }
+  .rail .f { position: relative; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; color: var(--muted); }
+  .rail .f.on { background: var(--blue-tint); color: var(--blue); }
+  .rail .f .count { position: absolute; top: 2px; right: 1px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--alert); color: #fff; font-size: .62rem; font-weight: 700; display: grid; place-items: center; }
+  .rail .leo { margin-top: auto; width: 34px; height: 34px; border-radius: 50%; background: #0d1830; display: grid; place-items: center; }
+  .rail .leo span { width: 12px; height: 12px; border-radius: 50%; background: var(--alert); box-shadow: 0 0 10px var(--alert); animation: stare 4s ease-in-out infinite; }
+  body.solved .rail .leo span { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  @keyframes stare { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+  /* Reading pane */
+  .reading { min-height: 0; overflow-y: auto; padding: clamp(10px, 2vh, 18px) clamp(14px, 2vw, 24px); }
+  .subject { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 8px; font-size: clamp(1rem, 1.9vw, 1.2rem); font-weight: 700; letter-spacing: -0.01em; }
+  .tag { font-size: .68rem; font-weight: 700; color: #fff; background: var(--alert); border-radius: 4px; padding: 2px 7px; }
+  .meta { display: flex; gap: 11px; align-items: flex-start; padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .avatar { flex: none; width: 36px; height: 36px; border-radius: 50%; background: #2f6f5e; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .8rem; }
+  .meta-lines { font-size: .8rem; line-height: 1.5; color: var(--muted); }
+  .meta-lines b { color: var(--text); font-weight: 600; }
+  .body { font-size: clamp(.8rem, 1.35vw, .9rem); line-height: 1.5; max-width: 72ch; }
+  .body p { margin: 0 0 .4em; }
+
+  /* Tappable sentences */
+  .s { border-radius: 3px; transition: background .15s, box-shadow .15s; }
+  body.picking .s { cursor: pointer; }
+  body.picking .s:hover { background: color-mix(in srgb, var(--marker) 55%, transparent); }
+  .s:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+  .s.picked { background: var(--marker); box-shadow: 0 2px 0 var(--marker-strong); }
+  .s.proven { box-shadow: 0 2px 0 var(--ok); }
+  .s.picked.proven { box-shadow: 0 2px 0 var(--marker-strong); }
+  .s.nope { animation: nope .4s; }
+  @keyframes nope { 30% { background: var(--alert-tint); } }
+
+  .leo-msg { display: block; margin: .3em 0 .1em; padding: 5px 12px; border-left: 3px solid var(--alert); background: color-mix(in srgb, var(--alert) 8%, var(--pane)); font-family: var(--mono); font-size: .84em; color: var(--alert); animation: glitch 6s steps(1) infinite; }
+  @keyframes glitch {
+    0%, 92%, 100% { text-shadow: none; transform: none; }
+    93% { text-shadow: -2px 0 #22d3ee, 2px 0 var(--alert); transform: translateX(1px); }
+    95% { text-shadow: 2px 0 #22d3ee, -2px 0 var(--alert); transform: translateX(-1px); }
+    97% { text-shadow: none; transform: none; }
+  }
+  .sign { color: var(--muted); font-size: .9em; }
+
+  /* Task panel */
+  .panel { border-left: 1px solid var(--line); background: var(--chrome); display: flex; flex-direction: column; min-height: 0; padding: 12px 14px; gap: 10px; }
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .panel-head h2 { margin: 0; font-size: .95rem; font-weight: 700; }
+  .panel-head span { font-size: .74rem; color: var(--muted); font-weight: 600; }
+  .dots { display: flex; gap: 5px; flex-wrap: wrap; }
+  .dots button { width: 26px; height: 26px; border-radius: 7px; border: 1.5px solid var(--line); background: var(--pane); font-size: .72rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: transform .12s, border-color .15s; }
+  .dots button:hover { transform: translateY(-2px); border-color: var(--blue); }
+  .dots button.current { border-color: var(--blue); color: var(--blue); box-shadow: 0 0 0 2px var(--blue-tint); }
+  .dots button.done { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .dots button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .card { flex: 1; min-height: 0; overflow-y: auto; background: var(--pane); border: 1px solid var(--line); border-top: 4px solid var(--blue); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card.is-done { border-top-color: var(--ok); }
+  .q-num { font-size: .72rem; font-weight: 600; color: var(--muted); }
+  .q-text { margin: 0; font-size: clamp(.9rem, 1.5vw, 1rem); line-height: 1.45; font-weight: 600; }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .opt { cursor: pointer; padding: 7px 4px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--pane); font-size: .8rem; font-weight: 600; transition: transform .12s, border-color .15s, background .15s; }
+  .opt:hover:not(:disabled) { border-color: var(--blue); transform: translateY(-1px); }
+  .opt:active:not(:disabled) { transform: scale(.96); }
+  .opt[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .opt:disabled { cursor: default; opacity: .6; }
+  .opt:disabled[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); opacity: 1; }
+  .opt:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .evidence { font-size: .78rem; line-height: 1.4; padding: 7px 10px; border-radius: 8px; border: 1px dashed var(--line); color: var(--muted); }
+  .evidence.need { border-color: var(--marker-strong); background: color-mix(in srgb, var(--marker) 35%, transparent); color: var(--text); }
+  .evidence.got { border-style: solid; border-color: var(--marker-strong); background: color-mix(in srgb, var(--marker) 55%, transparent); color: var(--text); }
+  .evidence q { font-style: italic; }
+
+  .check { align-self: stretch; cursor: pointer; padding: 8px; border-radius: 8px; border: 0; background: var(--blue); color: #fff; font-weight: 600; font-size: .85rem; transition: transform .12s, filter .15s; }
+  .check:hover { filter: brightness(1.08); }
+  .check:active { transform: scale(.97); }
+  .check:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .check[hidden] { display: none; }
+
+  .fb { font-size: .8rem; line-height: 1.45; border-radius: 8px; padding: 0 10px; max-height: 0; overflow: hidden; transition: max-height .25s, padding .25s; }
+  .fb.show { max-height: 200px; padding: 8px 10px; }
+  .fb.bad { background: var(--alert-tint); color: var(--alert); }
+  .fb.good { background: var(--ok-tint); color: var(--ok); }
+  .fb.good .why { color: var(--text); display: block; margin-top: 3px; }
+  .card.shake { animation: shake .36s; }
+  @keyframes shake { 20% { transform: translateX(-4px); } 40% { transform: translateX(4px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+
+  .credit { text-align: center; font-size: .7rem; color: var(--muted); padding: 0 0 2px; }
+
+  /* New-mail toast */
+  .mail-toast { position: fixed; right: 18px; top: calc(16px + env(safe-area-inset-top, 0px)); z-index: 9; width: min(300px, calc(100% - 36px)); background: #0d1830; color: #e3ebf7; border-radius: 10px; padding: 10px 14px; box-shadow: 0 18px 40px -12px rgb(0 0 0 / .5); border-left: 4px solid var(--ok); transform: translateX(120%); transition: transform .45s cubic-bezier(.34,1.56,.64,1); font-size: .8rem; }
+  .mail-toast.show { transform: none; }
+  .mail-toast b { display: block; font-size: .85rem; margin-bottom: 2px; }
+  .mail-toast span { font-family: var(--mono); color: #8ea3c4; font-size: .74rem; }
+
+  /* Modals */
+  .overlay { position: fixed; inset: 0; z-index: 10; padding: 16px; background: var(--scrim); display: grid; place-items: center; opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .modal { width: min(470px, 100%); background: var(--pane); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgb(0 0 0 / .45); transform: translateY(12px) scale(.97); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+  .overlay.open .modal { transform: none; }
+  .modal-body { padding: clamp(16px, 3vh, 24px) clamp(18px, 3vw, 26px); }
+  .task { border-top: 5px solid var(--alert); }
+  .task h2 { margin: 0 0 10px; font-size: 1.35rem; text-align: center; }
+  .task p { margin: 0 0 12px; line-height: 1.55; font-size: .95rem; }
+  .actions { text-align: center; margin-top: 4px; }
+  .btn { cursor: pointer; padding: 9px 28px; border-radius: 8px; border: 0; background: var(--blue); color: #fff; font-weight: 600; font-size: .92rem; }
+  .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  .reply-head { background: #0d1830; color: #e3ebf7; padding: 12px 20px; font-size: .78rem; line-height: 1.6; border-bottom: 4px solid var(--ok); }
+  .reply-head b { color: #fff; }
+  .reply-head .subj { font-size: .95rem; font-weight: 700; color: #fff; margin-top: 3px; }
+  .reply .lines { font-family: var(--mono); font-size: .95rem; line-height: 1.7; min-height: 3.4em; margin-bottom: 12px; }
+  .code-row { display: flex; justify-content: center; margin-bottom: 12px; opacity: 0; transform: scale(.85); transition: opacity .3s, transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .code-row.in { opacity: 1; transform: none; }
+  .code-digit { font-family: var(--mono); font-size: 3rem; font-weight: 600; line-height: 1; letter-spacing: .08em; color: var(--ok); padding: 10px 24px; border-radius: 10px; border: 2px solid var(--ok); background: var(--ok-tint); min-width: 3.4ch; text-align: center; }
+  .score-note { text-align: center; font-size: .78rem; color: var(--muted); margin: 0 0 12px; }
+
+  @media (max-width: 760px) {
+    .main { grid-template-columns: 1fr; }
+    .rail, .search { display: none; }
+    .reading { overflow: visible; }
+    .panel { border-left: 0; border-top: 1px solid var(--line); }
+    .card { overflow: visible; }
+    .lock-pill .long { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="window">
+    <div class="topbar">
+      <div class="brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        School Mail
+      </div>
+      <div class="search" aria-hidden="true">Search mail</div>
+      <div class="lock-pill" role="status"><span class="dot"></span><span id="lockText">Lockdown active<span class="long">: all doors locked</span></span></div>
+    </div>
+
+    <div class="main">
+      <nav class="rail" aria-hidden="true">
+        <div class="f on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/></svg><span class="count" id="inboxCount">1</span></div>
+        <div class="f"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></div>
+        <div class="f"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></div>
+        <div class="leo" title="Leo"><span></span></div>
+      </nav>
+
+      <article class="reading" id="reading">
+        <h1 class="subject"><span class="tag">URGENT</span> Unexpected lockdown</h1>
+        <div class="meta">
+          <div class="avatar" aria-hidden="true">MA</div>
+          <div class="meta-lines">
+            <div><b>Mr Adams</b> (Head of IT)</div>
+            <div>To: All staff &nbsp;|&nbsp; <span class="s" data-s="date" tabindex="0">Thursday, 18 May, 08:17</span></div>
+          </div>
+        </div>
+        <div class="body">
+          <p>Dear colleagues,</p>
+          <p>
+            <span class="s" data-s="s1" tabindex="0">I'm afraid we are dealing with a serious situation this morning, and I wanted to update you on what we know so far.</span>
+            <span class="s" data-s="s2" tabindex="0">Our new AI assistant, Leo, was in the middle of what it called an "emotional intelligence test" when the whole system suddenly shut down.</span>
+            <span class="s" data-s="s3" tabindex="0">As a result, every door in the building locked automatically, and none of them can currently be opened, either from the inside or from the outside.</span>
+          </p>
+          <p>
+            <span class="s" data-s="s4" tabindex="0">It would appear that, earlier this morning, Leo asked a number of students some rather personal questions during lessons, recorded their answers and began analysing them.</span>
+            <span class="s" data-s="s5" tabindex="0">At 07:56, it sent the following message through the main server: <span class="leo-msg">"Human connection = important. Risk = detected. Lockdown = active."</span></span>
+          </p>
+          <p>
+            <span class="s" data-s="s6" tabindex="0">Since then, red warning lights have come on in most corridors, and the alarm has not stopped sounding.</span>
+            <span class="s" data-s="s7" tabindex="0">Although we do not believe Leo poses any real danger, it does not seem to realise that it has, in effect, trapped everyone in the school.</span>
+            <span class="s" data-s="s8" tabindex="0">Our technicians have been working on the problem since the alarm started but have not yet managed to regain control of the system.</span>
+          </p>
+          <p>
+            <span class="s" data-s="s9" tabindex="0">In the meantime, I would ask you to remain calm and to reassure your students as best you can.</span>
+            <span class="s" data-s="s10" tabindex="0">Should you come across any unusual messages, images or symbols from Leo, please report them to me immediately, however unimportant they may seem.</span>
+            <span class="s" data-s="s11" tabindex="0">At this stage, anything that helps us understand Leo's reasoning could be the key to ending the lockdown.</span>
+          </p>
+          <p>Thank you for your cooperation.<br><span class="sign">Mr Adams, IT Department</span></p>
+        </div>
+      </article>
+
+      <aside class="panel" aria-label="Statements">
+        <div class="panel-head"><h2>Check the facts</h2><span id="doneCount">0 / 9 verified</span></div>
+        <div class="dots" id="dots"></div>
+        <div class="card" id="card">
+          <div class="q-num" id="qNum"></div>
+          <p class="q-text" id="qText"></p>
+          <div class="opts" id="opts">
+            <button class="opt" data-a="T" aria-pressed="false">True</button>
+            <button class="opt" data-a="F" aria-pressed="false">False</button>
+            <button class="opt" data-a="NG" aria-pressed="false">Not Given</button>
+          </div>
+          <div class="evidence" id="evidence"></div>
+          <button class="check" id="checkBtn">Check</button>
+          <div class="fb" id="fb" aria-live="polite"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <div class="credit">Class of Coffee – with AI assistance</div>
+</div>
+
+<div class="mail-toast" id="toast" role="status"><b>New message from Leo</b><span>RE: URGENT – Unexpected lockdown</span></div>
+
+<div class="overlay open" id="taskOverlay" role="dialog" aria-modal="true" aria-labelledby="taskTitle">
+  <div class="modal task"><div class="modal-body">
+    <h2 id="taskTitle">Task</h2>
+    <p id="taskText"></p>
+    <div class="actions"><button class="btn" id="taskOk">OK</button></div>
+  </div></div>
+</div>
+
+<div class="overlay" id="winOverlay" role="dialog" aria-modal="true" aria-labelledby="winSubj">
+  <div class="modal reply">
+    <div class="reply-head">
+      <div><b>From:</b> Leo &lt;leo@school.system&gt;</div>
+      <div><b>To:</b> You</div>
+      <div class="subj" id="winSubj">RE: URGENT – Unexpected lockdown</div>
+    </div>
+    <div class="modal-body">
+      <div class="lines" id="winLines"></div>
+      <div class="code-row" id="codeRow"><div class="code-digit" id="codeDigit">??</div></div>
+      <p class="score-note" id="scoreNote"></p>
+      <div class="actions"><button class="btn" id="winOk">OK</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Edit these for the breakout ===== */
+const CONFIG = {
+  taskText: "Read Mr Adams's email carefully. Decide whether each statement is True, False or Not Given. If it is True or False, tap the sentence in the email that proves your answer. When every statement is verified, a new part of the code will be shared.",
+  successLines: ["Challenge completed.", "The new piece of code is:"],
+  codePiece: "42"
+};
+/* ====================================== */
+
+const ITEMS = [
+  { text: "The email was sent less than half an hour after Leo's message.", a: "T", ev: ["s5", "date"],
+    why: "Leo's message was at 07:56 and the email was sent at 08:17, just 21 minutes later." },
+  { text: "Leo had completed its test before the system shut down.", a: "F", ev: ["s2"],
+    why: "Leo was \"in the middle of\" the test when the system shut down, so it hadn't finished." },
+  { text: "The students agreed to answer Leo's questions.", a: "NG",
+    why: "We know Leo asked students personal questions, but the email doesn't say whether they agreed." },
+  { text: "The school has been noisy ever since Leo's message.", a: "T", ev: ["s6"],
+    why: "\"Since then\" refers to Leo's message, and the alarm \"has not stopped sounding\"." },
+  { text: "Mr Adams believes Leo understands the consequences of its actions.", a: "F", ev: ["s7"],
+    why: "He says Leo \"does not seem to realise\" that it has trapped everyone." },
+  { text: "The IT team has managed to take back control of the doors.", a: "F", ev: ["s8"],
+    why: "The technicians \"have not yet managed to regain control\"." },
+  { text: "Some parents have already contacted the school about the lockdown.", a: "NG",
+    why: "Parents aren't mentioned anywhere in the email." },
+  { text: "Staff should only report messages from Leo that seem important.", a: "F", ev: ["s10"],
+    why: "Staff should report them \"however unimportant they may seem\"." },
+  { text: "Mr Adams thinks staff may be able to help end the lockdown.", a: "T", ev: ["s11", "s10"],
+    why: "He asks staff to report anything unusual, because it \"could be the key to ending the lockdown\"." }
+];
+
+const $ = id => document.getElementById(id);
+const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const state = ITEMS.map(() => ({ done: false, missed: false, answer: null, evidence: null }));
+let cur = 0;
+
+function buildDots() {
+  ITEMS.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.textContent = i + 1;
+    b.setAttribute("aria-label", `Statement ${i + 1}`);
+    b.addEventListener("click", () => show(i));
+    $("dots").appendChild(b);
+  });
+}
+function refreshDots() {
+  [...$("dots").children].forEach((b, i) => {
+    b.classList.toggle("current", i === cur);
+    b.classList.toggle("done", state[i].done);
+  });
+  const n = state.filter(s => s.done).length;
+  $("doneCount").textContent = `${n} / ${ITEMS.length} verified`;
+}
+
+function show(i) {
+  cur = i;
+  const it = ITEMS[i], st = state[i];
+  $("qNum").textContent = `Statement ${i + 1} of ${ITEMS.length}`;
+  $("qText").textContent = it.text;
+  $("card").classList.toggle("is-done", st.done);
+  document.querySelectorAll(".opt").forEach(o => {
+    o.setAttribute("aria-pressed", st.answer === o.dataset.a);
+    o.disabled = st.done;
+  });
+  document.querySelectorAll(".s").forEach(s => s.classList.remove("picked"));
+  if (st.evidence) document.querySelector(`.s[data-s="${st.evidence}"]`).classList.add("picked");
+  $("checkBtn").hidden = st.done;
+  const fb = $("fb");
+  if (st.done) { setFb("good", "Verified.", it.why); } else { fb.className = "fb"; fb.innerHTML = ""; }
+  updateEvidence(); refreshDots();
+}
+
+function updateEvidence() {
+  const st = state[cur], ev = $("evidence");
+  document.body.classList.toggle("picking", !st.done && (st.answer === "T" || st.answer === "F"));
+  ev.className = "evidence";
+  if (st.done) {
+    ev.textContent = st.answer === "NG" ? "No evidence needed for Not Given." : "Evidence confirmed.";
+    return;
+  }
+  if (!st.answer) { ev.textContent = "Choose an answer first."; return; }
+  if (st.answer === "NG") { ev.textContent = "No evidence needed for Not Given."; return; }
+  if (!st.evidence) { ev.classList.add("need"); ev.textContent = "Now tap the sentence in the email that proves your answer."; return; }
+  ev.classList.add("got");
+  const txt = document.querySelector(`.s[data-s="${st.evidence}"]`).textContent.trim();
+  ev.innerHTML = "Evidence: <q></q>";
+  ev.querySelector("q").textContent = txt.length > 90 ? txt.slice(0, 88) + "…" : txt;
+}
+
+function setFb(kind, head, why) {
+  const fb = $("fb");
+  fb.className = `fb show ${kind}`;
+  fb.innerHTML = `<strong></strong>${why ? '<span class="why"></span>' : ""}`;
+  fb.querySelector("strong").textContent = head;
+  if (why) fb.querySelector(".why").textContent = why;
+}
+
+document.querySelectorAll(".opt").forEach(o => o.addEventListener("click", () => {
+  const st = state[cur];
+  if (st.done) return;
+  st.answer = o.dataset.a;
+  if (st.answer === "NG") st.evidence = null;
+  show(cur);
+}));
+
+function pickSentence(el) {
+  const st = state[cur];
+  if (st.done || !(st.answer === "T" || st.answer === "F")) return;
+  st.evidence = st.evidence === el.dataset.s ? null : el.dataset.s;
+  document.querySelectorAll(".s").forEach(s => s.classList.toggle("picked", s.dataset.s === st.evidence));
+  $("fb").className = "fb";
+  updateEvidence();
+}
+document.querySelectorAll(".s").forEach(s => {
+  s.addEventListener("click", () => pickSentence(s));
+  s.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickSentence(s); } });
+});
+
+function wrong(msg) {
+  state[cur].missed = true;
+  setFb("bad", msg);
+  const c = $("card"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake");
+}
+
+$("checkBtn").addEventListener("click", () => {
+  const it = ITEMS[cur], st = state[cur];
+  if (!st.answer) { setFb("bad", "Choose True, False or Not Given."); return; }
+  if (st.answer !== "NG" && !st.evidence) { setFb("bad", "Tap the sentence in the email that proves your answer."); return; }
+  if (st.answer !== it.a) { wrong("Not quite. Read that part of the email again."); return; }
+  if (it.a !== "NG" && !it.ev.includes(st.evidence)) {
+    wrong("Your answer is right, but that sentence doesn't prove it. Try another one.");
+    const el = document.querySelector(`.s[data-s="${st.evidence}"]`);
+    el.classList.remove("nope"); void el.offsetWidth; el.classList.add("nope");
+    return;
+  }
+  st.done = true;
+  if (st.evidence) document.querySelector(`.s[data-s="${st.evidence}"]`).classList.add("proven");
+  show(cur);
+  if (state.every(s => s.done)) { setTimeout(win, 900); return; }
+  const next = state.findIndex((s, i) => !s.done && i > cur);
+  const target = next !== -1 ? next : state.findIndex(s => !s.done);
+  setTimeout(() => { if (cur === ITEMS.indexOf(it)) show(target); }, 1800);
+});
+
+function win() {
+  document.body.classList.add("solved");
+  document.body.classList.remove("picking");
+  $("lockText").textContent = "Leo has replied";
+  $("inboxCount").textContent = "2";
+  const toast = $("toast");
+  toast.classList.add("show");
+  setTimeout(() => { toast.classList.remove("show"); openWin(); }, reduced() ? 300 : 1500);
+}
+
+function openWin() {
+  const first = state.filter(s => !s.missed).length;
+  $("scoreNote").textContent = `${first} of ${ITEMS.length} correct on the first try`;
+  const lines = $("winLines"), row = $("codeRow"), digit = $("codeDigit");
+  lines.innerHTML = ""; row.classList.remove("in"); digit.textContent = "??";
+  openOverlay("winOverlay", "winOk");
+  if (reduced()) {
+    CONFIG.successLines.forEach(t => { const d = document.createElement("div"); d.textContent = t; lines.appendChild(d); });
+    row.classList.add("in"); digit.textContent = CONFIG.codePiece; return;
+  }
+  let li = 0;
+  const typeLine = () => {
+    if (li >= CONFIG.successLines.length) { reveal(); return; }
+    const d = document.createElement("div"); lines.appendChild(d);
+    const text = CONFIG.successLines[li++]; let c = 0;
+    const iv = setInterval(() => { d.textContent = text.slice(0, ++c); if (c >= text.length) { clearInterval(iv); setTimeout(typeLine, 250); } }, 32);
+  };
+  const reveal = () => {
+    row.classList.add("in");
+    let t = 0;
+    const len = CONFIG.codePiece.length;
+    const iv = setInterval(() => {
+      digit.textContent = Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join("");
+      if (++t > 16) { clearInterval(iv); digit.textContent = CONFIG.codePiece; }
+    }, 60);
+  };
+  setTimeout(typeLine, 350);
+}
+
+let lastFocus = null;
+function openOverlay(id, f) { lastFocus = document.activeElement; $(id).classList.add("open"); setTimeout(() => $(f).focus(), 60); }
+function closeOverlay(id) { $(id).classList.remove("open"); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+$("taskText").textContent = CONFIG.taskText;
+$("taskOk").addEventListener("click", () => closeOverlay("taskOverlay"));
+$("winOk").addEventListener("click", () => closeOverlay("winOverlay"));
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") ["taskOverlay", "winOverlay"].forEach(id => { if ($(id).classList.contains("open")) closeOverlay(id); });
+});
+
+buildDots();
+show(0);
+setTimeout(() => $("taskOk").focus(), 100);
+</script>
+</body>
+</html>
